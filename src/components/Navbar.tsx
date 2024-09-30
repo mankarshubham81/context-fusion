@@ -32,7 +32,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-10 bg-gray-800 rounded-b-md border-b border-gray-500">
+    <header className="sticky top-0 z-10 bg-gray-900 rounded-b-md ">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo Section */}
         <div>
@@ -77,7 +77,7 @@ export default function Header() {
         </div>
 
         {/* Navigation Menu (visible on medium and above screens) */}
-        <nav className="hidden md:flex space-x-4">
+        <nav className="hidden md:flex space-x-4 mx-4">
           <Link href="/" className="hover:underline text-white">
             Home
           </Link>
@@ -90,18 +90,18 @@ export default function Header() {
         </nav>
 
         {/* Call-to-action buttons (visible on medium and above screens) */}
-        <div className="hidden md:flex space-x-4">
+        {/* <div className="hidden md:flex space-x-4">
           {ctas.map((cta, index) => (
             <Link key={index} href={cta.href} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
               {cta.label}
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Mobile Menu (visible when hamburger menu is clicked) */}
       {menuOpen && (
-        <div className="md:hidden bg-gray-800">
+        <div className="md:hidden bg-gray-900">
           <nav className="flex flex-col space-y-2 p-4">
             <Link href="/" className="hover:underline text-white">
               Home
@@ -114,13 +114,13 @@ export default function Header() {
             </Link>
           </nav>
 
-          <div className="flex flex-col space-y-2 p-4">
+          {/* <div className="flex flex-col space-y-2 p-4">
             {ctas.map((cta, index) => (
               <Link key={index} href={cta.href} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                 {cta.label}
               </Link>
             ))}
-          </div>
+          </div> */}
         </div>
       )}
     </header>

@@ -13,7 +13,7 @@ const CategoryList = ({ categories, onCategoryClick }: CategoryListProps) => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div className="bg-gray-900 p-6  rounded-lg  shadow-lg ">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold mb-4">Categories</h2>
         {/* Dropdown toggle button for mobile */}

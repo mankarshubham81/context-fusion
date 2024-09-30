@@ -228,7 +228,7 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className='bg-black'>
       <Head>
         <title>My Blog | Best SEO Practices</title>
         <meta name="description" content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business." />
@@ -254,7 +254,7 @@ const Home = () => {
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 border rounded-md shadow-sm focus:outline-none text-slate-900 focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 bg-gray-700 rounded-md shadow-sm focus:outline-none text-gray-100 focus:ring-2 focus:ring-customBlue"
               />
             </div>
 
@@ -262,7 +262,7 @@ const Home = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {currentPosts.length > 0 ? (
                 currentPosts.map((post, index) => (
-                  <div key={index} className="cursor-pointer transition-transform duration-300 hover:scale-105 rounded-md shadow-lg">
+                  <div key={index} className="cursor-pointer bg-gray-900 transition-transform  duration-300 hover:scale-105 rounded-md shadow-lg">
                     <BlogPost
                       slug={post.slug}
                       key={index}
@@ -282,7 +282,7 @@ const Home = () => {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="mt-8 flex border-2 border-gray-300 pb-5 rounded-md justify-center">
+              <div className="mt-8 flex bg-gray-900 pb-5 rounded-md justify-center">
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
