@@ -13,7 +13,15 @@ interface PaginationProps {
         <button
           onClick={() => previousPage && onPageChange(previousPage)}
           disabled={!previousPage}
-          className={`px-4 py-2 ${previousPage ? 'text-blue-600' : 'text-gray-400 cursor-not-allowed'}`}
+          className={`px-4 py-2 sm:my-2 mx-4 
+          text-white 
+          border 
+          bg-black
+          transition-all
+          rounded-md
+          border-customBlue hover:text-white 
+          transition-colors duration-200 ease-in-out
+          focus:outline-none focus:ring-2 focus:ring-gray-500 ${previousPage ? 'text-customBlue' : 'text-gray-400 cursor-not-allowed'}`}
         >
           Previous
         </button>
@@ -21,7 +29,15 @@ interface PaginationProps {
         <button
           onClick={() => nextPage && onPageChange(nextPage)}
           disabled={!nextPage}
-          className={`px-4 py-2 ${nextPage ? 'text-blue-600' : 'text-gray-400 cursor-not-allowed'}`}
+          className={`px-4 py-2 sm:my-2 mx-4 
+          text-white 
+          border 
+          bg-black
+          transition-all
+          rounded-md
+          border-customBlue hover:text-white 
+          transition-colors duration-200 ease-in-out
+          focus:outline-none focus:ring-2 focus:ring-gray-500 ${nextPage ? 'text-customBlue' : 'text-gray-400 cursor-not-allowed'}`}
         >
           Next
         </button>

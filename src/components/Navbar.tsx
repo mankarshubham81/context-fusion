@@ -32,7 +32,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-10 bg-gray-700 rounded-b-md border-b border-gray-500">
+    <header className="sticky top-0 z-10 bg-gray-800 rounded-b-md border-b border-gray-500">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo Section */}
         <div>

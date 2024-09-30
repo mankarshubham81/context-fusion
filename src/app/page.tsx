@@ -254,7 +254,7 @@ const Home = () => {
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border rounded-md shadow-sm focus:outline-none text-slate-900 focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -276,13 +276,13 @@ const Home = () => {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500">No posts found.</p>
+                <p className="text-gray-300">No posts found.</p>
               )}
             </div>
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="mt-8 flex justify-center">
+              <div className="mt-8 flex border-2 border-gray-300 pb-5 rounded-md justify-center">
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
