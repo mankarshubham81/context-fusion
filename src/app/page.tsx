@@ -1,101 +1,302 @@
-import Image from "next/image";
+"use client";
+import { useState, useEffect } from 'react';
+import Navbar from '../components/Navbar';
+import CategoryList from '../components/CategoryList';
+import BlogPost from '../components/BlogPost';
+import Pagination from '../components/Pagination';
+import Footer from '../components/Footer';
+import Head from 'next/head';
 
-export default function Home() {
+// Sample Categories and Posts
+const categories = ['All', 'Technology', 'Lifestyle', 'Business', 'Travel', 'Food', 'Health'];
+
+const blogPosts = [
+  {
+    slug: 'mastering-nextjs',
+    title: 'Mastering Next.js: Best Practices for SEO',
+    excerpt: 'Learn how to optimize your Next.js applications for search engines with practical tips and examples...',
+    category: 'Technology',
+    date: 'September 25, 2024',
+    author: 'John Doe',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Next.js+SEO',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Lifestyle',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: 'How to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Business',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Mastering Next.js: Best Practices for SEO',
+    excerpt: 'Learn how to optimize your Next.js applications for search engines with practical tips and examples...',
+    category: 'Technology',
+    date: 'September 25, 2024',
+    author: 'John Doe',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Next.js+SEO',
+  },
+  {
+    title: '10 Tips to Maintain a Healthy Work-Life Balance',
+    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
+    category: 'Food',
+    date: 'September 20, 2024',
+    author: 'Jane Smith',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  },
+  {
+    title: 'hhhhhHow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhh to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  {
+    title: 'Hhhhow to Start a Successful Business in 2024',
+    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
+    category: 'Health',
+    date: 'September 15, 2024',
+    author: 'Michael Brown',
+    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
+  },
+  
+];
+
+const Home = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+  const postsPerPage = 4;  // 2x2 grid means 4 posts per page
+
+  // Function to filter posts by category and search term
+  const filterPosts = () => {
+    let updatedPosts = selectedCategory === 'All'
+      ? blogPosts
+      : blogPosts.filter(post => post.category === selectedCategory);
+
+    if (searchTerm.trim()) {
+      updatedPosts = updatedPosts.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return updatedPosts;
+  };
+
+  useEffect(() => {
+    const filtered = filterPosts();
+    setFilteredPosts(filtered);
+    setCurrentPage(1); // Reset to the first page when search or category changes
+  }, [searchTerm, selectedCategory]);
+
+  // Pagination logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1); // Reset to the first page when category changes
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <Head>
+        <title>My Blog | Best SEO Practices</title>
+        <meta name="description" content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business." />
+        <meta name="keywords" content="Next.js, blog, SEO, lifestyle, business" />
+        <meta name="author" content="John Doe" />
+      </Head>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <Navbar />
+
+      <main className="container mx-auto py-10 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Categories Section */}
+          <aside className="md:col-span-1">
+            <CategoryList categories={categories} onCategoryClick={handleCategoryClick} />
+          </aside>
+
+          {/* Blog Posts Section */}
+          <section className="md:col-span-3">
+            {/* Search Bar */}
+            <div className="mb-6">
+              <input
+                type="text"
+                placeholder="Search blog posts..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full p-3 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            {/* Blog Post Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {currentPosts.length > 0 ? (
+                currentPosts.map((post, index) => (
+                  <div key={index} className="cursor-pointer transition-transform duration-300 hover:scale-105 rounded-md shadow-lg">
+                    <BlogPost
+                      slug={post.slug}
+                      key={index}
+                      title={post.title}
+                      excerpt={post.excerpt}
+                      category={post.category}
+                      date={post.date}
+                      author={post.author}
+                      imageUrl={post.imageUrl}
+                    />
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-500">No posts found.</p>
+              )}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="mt-8 flex justify-center">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageChange}
+                />
+              </div>
+            )}
+          </section>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      <Footer />
     </div>
   );
-}
+};
+
+export default Home;
