@@ -35,7 +35,7 @@ export default function Header() {
     <header className="sticky top-0 z-10 bg-gray-900 rounded-b-md ">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo Section */}
-        <div>
+        {/* <div>
           <Link href="/" passHref>
             {logoImage ? (
               <Image src={logoImage} alt={logo?.name || title} width={120} height={40} />
@@ -43,6 +43,12 @@ export default function Header() {
               <span className="text-xl font-bold text-white">{title}</span>
             )}
           </Link>
+        </div> */}
+        <div>
+          <Link href="/" className='cursor-pointer'>
+            <span className="text-xl sm:ml-32 sm:mr-2" >Logo</span>
+          </Link>
+            <span className="text-xlg font-bold ml-4 sm:ml-4">Context Fusion</span>
         </div>
 
         {/* Hamburger Menu Icon (visible on mobile) */}
@@ -77,15 +83,15 @@ export default function Header() {
         </div>
 
         {/* Navigation Menu (visible on medium and above screens) */}
-        <nav className="hidden md:flex space-x-4 mx-4">
+        <nav className="hidden md:flex space-x-4 mr-8 sm:mr-32">
           <Link href="/" className="hover:underline text-white">
             Home
           </Link>
           <Link href="/about" className="hover:underline text-white">
-            About
+            About Me
           </Link>
-          <Link href="/services" className="hover:underline text-white">
-            Services
+          <Link href="/connect" className="hover:underline text-white">
+            Connect
           </Link>
         </nav>
 

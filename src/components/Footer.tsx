@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 // import { client } from '@/sanity/lib/client';
 // import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
 // import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
-import { FaFacebookF, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
 // import { FETCH_FOOTER } from './../../../sanity/queries/footer/fetch-footer';
 
@@ -41,23 +41,13 @@ const sampleFooterData = {
       },
       {
         _key: '2',
-        usefulLinkName: 'About Us',
+        usefulLinkName: 'About Me',
         usefulLinkPath: '/about',
       },
       {
         _key: '3',
-        usefulLinkName: 'Services',
-        usefulLinkPath: '/services',
-      },
-      {
-        _key: '4',
-        usefulLinkName: 'Contact',
-        usefulLinkPath: '/contact',
-      },
-      {
-        _key: '5',
-        usefulLinkName: 'Blog',
-        usefulLinkPath: '/blog',
+        usefulLinkName: 'Connect',
+        usefulLinkPath: '/Connect',
       },
     ]
   };
@@ -112,19 +102,19 @@ export default function Footer(_props: IFooterProps) {
           {/* Section 2: Address */}
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Address</h3>
-            <p className="mb-2">{"chatrapati colony"}</p>
-            <p className="mb-2">{"chatrapati sambhajinagar, Mahahashtra"}</p>
+            <p className="mb-2">{"Chatrapati colony"}</p>
+            <p className="mb-2">{"Chatrapati Sambhajinagar, Mahahashtra"}</p>
             {/* <p className="mb-2">Country</p> */}
             <p>{"+917391014689"}</p>
           </div>
 
           {/* Section 3: Social Media Icons */}
           <div className="flex flex-col items-center md:items-center">
-            <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
+            <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-6">
-              <SocialIcon href="https://www.facebook.com/chandrashekhar.mahamuni" icon={<FaFacebookF size={'25px'} />} />
-              {/* <SocialIcon href="#" icon={<FaTwitter size={'25px'} />} /> */}
-              {/* <SocialIcon href="#" icon={<FaInstagram size={'25px'} />} /> */}
+              <SocialIcon href="https://www.facebook.com/chandrashekhar.mahamuni" icon={<FaFacebook size={'25px'} />} />
+              <SocialIcon href="#" icon={<FaTwitter size={'25px'} />} />
+              <SocialIcon href="#" icon={<FaInstagram size={'25px'} />} />
               <SocialIcon href="https://www.youtube.com/user/shekharmahamuni/featured" icon={<FaYoutube size={'25px'} />} />
             </div>
           </div>
@@ -133,7 +123,7 @@ export default function Footer(_props: IFooterProps) {
 
       {/* Bottom Section: Copyright */}
       <div className="border-t border-gray-700 py-4 text-center">
-        <p className="text-sm">&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+        <p className="text-sm">&copy; {new Date().getFullYear()} Context Fusion. All rights reserved.</p>
       </div>
     </footer>
   );
