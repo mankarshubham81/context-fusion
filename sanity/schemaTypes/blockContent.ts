@@ -54,20 +54,46 @@ export default defineType({
       ],
     }),
     // Code block field for code snippets
-    defineArrayMember({
-      title: 'Code Block',
-      type: 'code',
-      options: {
-        language: 'javascript', // Default language, you can also allow users to choose
-        languageAlternatives: [
-          { title: 'JavaScript', value: 'javascript' },
-          { title: 'TypeScript', value: 'typescript' },
-          { title: 'HTML', value: 'html' },
-          { title: 'CSS', value: 'css' },
-          { title: 'Python', value: 'python' },
-        ],
-      },
-    }),
+   defineArrayMember({
+    title: 'Code Block',
+    type: 'code',
+    options: {
+      language: 'javascript', // Default language, you can also allow users to choose
+      languageAlternatives: [
+        { title: 'JavaScript', value: 'javascript' },
+        { title: 'TypeScript', value: 'typescript' },
+        { title: 'HTML', value: 'html' },
+        { title: 'CSS', value: 'css' },
+        { title: 'Python', value: 'python' },
+        { title: 'Ruby', value: 'ruby' },
+        { title: 'Java', value: 'java' },
+        { title: 'C', value: 'c' },
+        { title: 'C++', value: 'cpp' },
+        { title: 'C#', value: 'csharp' },
+        { title: 'PHP', value: 'php' },
+        { title: 'Go', value: 'go' },
+        { title: 'Swift', value: 'swift' },
+        { title: 'Kotlin', value: 'kotlin' },
+        { title: 'Rust', value: 'rust' },
+        { title: 'Shell', value: 'bash' },
+        { title: 'R', value: 'r' },
+        { title: 'Perl', value: 'perl' },
+        { title: 'SQL', value: 'sql' },
+        { title: 'Markdown', value: 'markdown' },
+        { title: 'YAML', value: 'yaml' },
+        { title: 'JSON', value: 'json' },
+        { title: 'GraphQL', value: 'graphql' },
+        { title: 'Dockerfile', value: 'dockerfile' },
+        { title: 'PowerShell', value: 'powershell' },
+        { title: 'Lua', value: 'lua' },
+        { title: 'Scala', value: 'scala' },
+        { title: 'Elixir', value: 'elixir' },
+        { title: 'Haskell', value: 'haskell' },
+        { title: 'Objective-C', value: 'objectivec' },
+        { title: 'MATLAB', value: 'matlab' },
+      ],
+    },
+  }),
     // Video embedding field
     defineArrayMember({
       type: 'object',

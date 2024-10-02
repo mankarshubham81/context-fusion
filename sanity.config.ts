@@ -1,5 +1,5 @@
 'use client'
-
+import { codeInput } from '@sanity/code-input';
 /**
  * This configuration is used to for the Sanity Studio that’s mounted on the `\src\app\studio\[[...tool]]\page.tsx` route
  */
@@ -23,5 +23,6 @@ export default defineConfig({
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
+    codeInput(), // Register the code input plugin here
   ],
 })
