@@ -15,6 +15,15 @@ const nextConfig = {
             hostname: 'via.placeholder.com',
           }
         ],
+      },
+
+  experimental: {
+    taint: true,
+  },
+      logging: {
+        fetches: {
+          fullUrl: false,
+        },
       }
 };
 

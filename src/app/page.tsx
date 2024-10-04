@@ -6,200 +6,116 @@ import BlogPost from '../components/BlogPost';
 import Pagination from '../components/Pagination';
 import Footer from '../components/Footer';
 import Head from 'next/head';
+import { client as sanityClient } from '../sanity/lib/client';
+// import client from '../sanity'; // Import the Sanity client
 
-// Sample Categories and Posts
-const categories = ['All', 'Technology', 'Lifestyle', 'Business', 'Travel', 'Food', 'Health'];
 
-const blogPosts = [
-  {
-    slug: 'mastering-nextjs',
-    title: 'Mastering Next.js: Best Practices for SEO',
-    excerpt: 'Learn how to optimize your Next.js applications for search engines with practical tips and examples...',
-    category: 'Technology',
-    date: 'September 25, 2024',
-    author: 'John Doe',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Next.js+SEO',
+// Define a type for the mainImage field
+type MainImage = {
+  asset: {
+    url: string;
+  };
+  alt: string;
+};
+
+// Define a type for categories
+type Category = {
+  title: string;
+  slug: string;
+};
+
+// Define the blog post data type
+interface BlogPostData {
+  title: string;
+  slug: { current: string };
+  authorName: string;
+  mainImage: MainImage;
+  categories: Category[];  // Updated to use the correct Category type
+  publishedAt: string;
+  excerpt: string;
+  readingTime: number;
+  body?: string;
+}
+
+// type BlogPost = {
+//   slug: { current: string };
+//   title: string;
+//   content: string;  // or the equivalent field in your Sanity schema
+//   category: { title: string }[];
+//   publishedAt: string;
+//   author: { name: string };
+//   mainImage: {
+//     asset: { url: string };
+//     alt: string;
+//   };
+// };
+
+
+const categories = ["All", "Technology", "Lifestyle", "Business", "Travel", "Food", "Anime"];
+
+
+// GROQ query to fetch the blog posts from Sanity
+const query = `*[_type == "post"]{
+  title,
+  slug,
+  "authorName": author->name,
+  mainImage{
+    asset->{url},
+    alt
   },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
+  categories[]->{
+    title
   },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Lifestyle',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: 'How to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Business',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Mastering Next.js: Best Practices for SEO',
-    excerpt: 'Learn how to optimize your Next.js applications for search engines with practical tips and examples...',
-    category: 'Technology',
-    date: 'September 25, 2024',
-    author: 'John Doe',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Next.js+SEO',
-  },
-  {
-    title: '10 Tips to Maintain a Healthy Work-Life Balance',
-    excerpt: 'Struggling to find balance between your work and personal life? Here are 10 tips to help you manage stress...',
-    category: 'Food',
-    date: 'September 20, 2024',
-    author: 'Jane Smith',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Work-Life+Balance',
-  },
-  {
-    title: 'hhhhhHow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhh to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  {
-    title: 'Hhhhow to Start a Successful Business in 2024',
-    excerpt: 'Starting a business in 2024 requires careful planning and strategy. Here’s how you can set up for success...',
-    category: 'Health',
-    date: 'September 15, 2024',
-    author: 'Michael Brown',
-    imageUrl: 'https://via.placeholder.com/300x200?text=Business+2024',
-  },
-  
-];
+  publishedAt,
+  excerpt,
+  readingTime
+}`;
+
+const categoriesQuery = `*[_type == "category"]{
+  title,
+  slug
+}`;
+
+
+// // Fetch all categories
+// const getAllCategories = async (): Promise<Category[]> => {
+//   const categories: Category[] = await sanityClient.fetch(categoriesQuery);
+//   return categories;
+// };
 
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
-  const postsPerPage = 4;  // 2x2 grid means 4 posts per page
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filteredPosts, setFilteredPosts] = useState<BlogPostData[]>([]);
+  const [allPosts, setAllPosts] = useState<BlogPostData[]>([]);
+  const [allCategories, setAllCategories] = useState([]);
+  const postsPerPage = 4; // 2x2 grid means 4 posts per page
+
+
+  // Fetch posts from Sanity
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await sanityClient.fetch(query);
+      const allCategoriesData: [] = await sanityClient.fetch(categoriesQuery);
+      setAllPosts(data);
+      setAllCategories(allCategoriesData);
+      setFilteredPosts(data); // Initial load shows all posts
+    };
+    fetchData();
+  }, []);
 
   // Function to filter posts by category and search term
   const filterPosts = () => {
     let updatedPosts = selectedCategory === 'All'
-      ? blogPosts
-      : blogPosts.filter(post => post.category === selectedCategory);
-
+      ? allPosts
+      : allPosts.filter((post) =>
+          post.categories.some((cat: any) => cat.title === selectedCategory)
+        );
     if (searchTerm.trim()) {
-      updatedPosts = updatedPosts.filter(post =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+      updatedPosts = updatedPosts.filter((post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -210,7 +126,7 @@ const Home = () => {
     const filtered = filterPosts();
     setFilteredPosts(filtered);
     setCurrentPage(1); // Reset to the first page when search or category changes
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, allPosts]);
 
   // Pagination logic
   const indexOfLastPost = currentPage * postsPerPage;
@@ -228,7 +144,7 @@ const Home = () => {
   };
 
   return (
-    <div className='bg-black'>
+    <div className="bg-black">
       <Head>
         <title>My Blog | Best SEO Practices</title>
         <meta name="description" content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business." />
@@ -242,7 +158,7 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Categories Section */}
           <aside className="md:col-span-1">
-            <CategoryList categories={categories} onCategoryClick={handleCategoryClick} />
+            <CategoryList categories={allCategories} onCategoryClick={handleCategoryClick} />
           </aside>
 
           {/* Blog Posts Section */}
@@ -262,16 +178,16 @@ const Home = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {currentPosts.length > 0 ? (
                 currentPosts.map((post, index) => (
-                  <div key={index} className="cursor-pointer bg-gray-900 transition-transform  duration-300 hover:scale-105 rounded-md shadow-lg">
+                  <div key={index} className="cursor-pointer bg-gray-900 transition-transform duration-300 hover:scale-105 rounded-md shadow-lg">
                     <BlogPost
-                      slug={post.slug}
+                      slug={post.slug.current}
                       key={index}
                       title={post.title}
                       excerpt={post.excerpt}
-                      category={post.category}
-                      date={post.date}
-                      author={post.author}
-                      imageUrl={post.imageUrl}
+                      category={post.categories.map((cat: any) => cat.title).join(', ')}
+                      date={new Date(post.publishedAt).toDateString()}
+                      author={post.authorName}
+                      imageUrl={post.mainImage.asset.url}
                     />
                   </div>
                 ))

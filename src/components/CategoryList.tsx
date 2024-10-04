@@ -1,7 +1,15 @@
 import { useState } from 'react';
 
+// Define a type for categories
+type Category = {
+  title: string;
+  slug: {
+    current: string;
+  };
+};
+
 interface CategoryListProps {
-  categories: string[];
+  categories: Category[];  // Array of Category objects
   onCategoryClick: (category: string) => void;
 }
 
@@ -13,7 +21,7 @@ const CategoryList = ({ categories, onCategoryClick }: CategoryListProps) => {
   };
 
   return (
-    <div className="bg-gray-900 p-6  rounded-lg  shadow-lg ">
+    <div className="bg-gray-900 p-6 rounded-lg shadow-lg">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold mb-4">Categories</h2>
         {/* Dropdown toggle button for mobile */}
@@ -31,13 +39,13 @@ const CategoryList = ({ categories, onCategoryClick }: CategoryListProps) => {
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <li
-            key={index}
-            onClick={() => onCategoryClick(category)}
+            key={category.slug.current} // Use unique slug for the key
+            onClick={() => onCategoryClick(category.title)}
             className="transition-transform duration-300 hover:scale-95 text-gray-200 hover:text-customBlue cursor-pointer"
           >
-            {category}
+            {category.title} {/* Render category title */}
           </li>
         ))}
       </ul>
