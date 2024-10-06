@@ -64,7 +64,7 @@ const MobileNav = () => {
   };
 
   return (
-    <div className="sm:hidden text-customBlue dark:bg-gray-900 dark:text-white">
+    <div className="sm:hidden text-white dark:bg-gray-900 dark:text-white">
       <button className="ml-1 mr-1 h-8 w-8 rounded py-1" aria-label="Toggle Menu" onClick={onToggleNav}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -81,12 +81,12 @@ const MobileNav = () => {
       </button>
       <div className={className}>
         <div className="flex justify-end">
-          <button className="mr-1 mt-5 h-8 w-8 rounded" aria-label="Toggle Menu" onClick={onToggleNav}>
+          <button className="mr-5 mt-5 h-8 w-8 rounded" aria-label="Toggle Menu" onClick={onToggleNav}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="text-gray-900 dark:text-gray-100"
+              className="bg-transparent size-8 dark:text-gray-100"
             >
               <path
                 fillRule="evenodd"
