@@ -29,8 +29,8 @@ interface BlogPostData {
   title: string;
   slug: { current: string };
   authorName: string;
-  mainImage: MainImage;
-  categories: Category[];  // Updated to use the correct Category type
+  mainImage: MainImage; // Use the defined MainImage type
+  categories: Category[];
   publishedAt: string;
   excerpt: string;
   readingTime: number;
@@ -89,7 +89,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredPosts, setFilteredPosts] = useState<BlogPostData[]>([]);
   const [allPosts, setAllPosts] = useState<BlogPostData[]>([]);
-  const [allCategories, setAllCategories] = useState([]);
+  const [allCategories, setAllCategories] = useState<Category[]>([]);
   const postsPerPage = 4; // 2x2 grid means 4 posts per page
 
 
@@ -97,7 +97,9 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await sanityClient.fetch(query);
-      const allCategoriesData: [] = await sanityClient.fetch(categoriesQuery);
+      const allCategoriesData = await sanityClient.fetch(categoriesQuery);
+      console.log("000 aaa")
+      console.log("102",allCategoriesData)
       setAllPosts(data);
       setAllCategories(allCategoriesData);
       setFilteredPosts(data); // Initial load shows all posts
@@ -112,12 +114,15 @@ const Home = () => {
       : allPosts.filter((post) =>
           post.categories.some((cat: any) => cat.title === selectedCategory)
         );
+    console.log("pppp", allPosts)
+    console.log("aaaaa", updatedPosts)
     if (searchTerm.trim()) {
       updatedPosts = updatedPosts.filter((post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
+    console.log("cccccc", updatedPosts)
 
     return updatedPosts;
   };
@@ -144,7 +149,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-black">
+    <div className=" mt-8">
       <Head>
         <title>My Blog | Best SEO Practices</title>
         <meta name="description" content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business." />
@@ -152,10 +157,10 @@ const Home = () => {
         <meta name="author" content="John Doe" />
       </Head>
 
-      <Navbar />
+      {/* <Navbar /> */}
 
       <main className="container mx-auto py-10 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {/* Categories Section */}
           <aside className="md:col-span-1">
             <CategoryList categories={allCategories} onCategoryClick={handleCategoryClick} />
@@ -170,15 +175,14 @@ const Home = () => {
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 bg-gray-700 rounded-md shadow-sm focus:outline-none text-gray-100 focus:ring-2 focus:ring-customBlue"
+                className="w-full p-3 text-black bg-gray-200 dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-customBlue shadow-md"
               />
             </div>
 
             {/* Blog Post Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {currentPosts.length > 0 ? (
                 currentPosts.map((post, index) => (
-                  <div key={index} className="cursor-pointer bg-gray-900 transition-transform duration-300 hover:scale-105 rounded-md shadow-lg">
                     <BlogPost
                       slug={post.slug.current}
                       key={index}
@@ -189,7 +193,6 @@ const Home = () => {
                       author={post.authorName}
                       imageUrl={post.mainImage.asset.url}
                     />
-                  </div>
                 ))
               ) : (
                 <p className="text-gray-300">No posts found.</p>

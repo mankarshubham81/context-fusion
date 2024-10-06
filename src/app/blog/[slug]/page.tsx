@@ -134,6 +134,7 @@ interface Props {
 
 const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   const post: BlogPost = await sanityClient.fetch(query, { slug });
+  console.log("PP : ", post);
 
   if (!post) {
     return null; // Handle cases where the post is not found
@@ -160,7 +161,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const post = await getPostBySlug(params.slug);
 
-  console.log("post 125", post);
+  // console.log("post 125", post);
 
   if (!post) {
     return {

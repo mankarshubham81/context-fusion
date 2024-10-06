@@ -1,134 +1,75 @@
-"use client"
-import Link from 'next/link';
-import Image from 'next/image';
-import React, { useState } from 'react';
+"use client";
 
-export default function Header() {
-  // Hardcoded static data
-  const title = "My Website";
-  const logo = {
-    image: {
-      dark: "/logo-dark.png",
-      default: "/logo-default.png",
-    },
-    name: "My Website",
-  };
+// import { useRouter } from 'next/router';
+import clsx from 'clsx';
+import Link from './Link';
+import MobileNav from './MobileNav';
+import ThemeSwitch from './ThemeSwitch';
+import AnalyticsLink from './AnalyticsLink';
 
-  const ctas = [
-    {
-      label: 'Sign Up',
-      href: '/signup',
-    },
-    {
-      label: 'Log In',
-      href: '/login',
-    },
-  ];
 
-  // Determine which logo to use
-  const logoImage = logo?.image?.dark || logo?.image?.default;
+export const headerNavLinks = [
+  {
+    title: 'Home',
+    href: '/',
+    description: 'Go back to the homepage',
+  },
+  {
+    title: 'Blog',
+    href: '/blog',
+    description: 'Explore latest posts, articles, and insights',
+  },
+  {
+    title: 'About',
+    href: '/about',
+    description: 'Learn more about the site and its purpose',
+  },
+  {
+    title: 'Contact',
+    href: '/contact',
+    description: 'Get in touch for queries or collaborations',
+  },
+];
 
-  // State to control mobile menu visibility
-  const [menuOpen, setMenuOpen] = useState(false);
+const Header = () => {
+  // const router = useRouter();  // Ensure this is client-side by "use client" directive at the top
 
   return (
-    <header className="sticky top-0 z-10 bg-gray-900 rounded-b-md ">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        {/* Logo Section */}
-        {/* <div>
-          <Link href="/" passHref>
-            {logoImage ? (
-              <Image src={logoImage} alt={logo?.name || title} width={120} height={40} />
-            ) : (
-              <span className="text-xl font-bold text-white">{title}</span>
-            )}
-          </Link>
-        </div> */}
-        <div>
-          <Link href="/" className='cursor-pointer'>
-            <span className="text-xl sm:ml-32 sm:mr-2" >Logo</span>
-          </Link>
-            <span className="text-xlg font-bold ml-4 sm:ml-4">Context Fusion</span>
-        </div>
-
-        {/* Hamburger Menu Icon (visible on mobile) */}
-        <div className="md:hidden">
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-white focus:outline-none"
-            aria-label="Toggle Menu"
-          >
-            {menuOpen ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+    <div>
+    <header className="supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-gray-300 text-black py-4 backdrop-blur dark:dark:bg-gray-900 dark:text-white">
+      <div className="mx-auto flex max-w-4xl items-center justify-between px-3 xl:max-w-5xl xl:px-0">
+        <Link href="/" aria-label="Context Fusion" className="flex items-center">
+          <div className="animate-wave">Logo</div>
+          <div className="group ml-2 text-xl font-bold transition duration-300 text-customBlue">
+            Context Fusion
+            <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[85%] bg-gray-300  dark:dark:bg-gray-900 dark:text-white"></span>
+          </div>
+        </Link>
+        <div className="flex items-center text-base leading-5">
+          <div className="hidden sm:block">
+            {headerNavLinks.map((link) => (
+              <Link
+                key={link.title}
+                href={link.href}
+                className={clsx(
+                  'mx-1 rounded px-2 py-1 font-medium sm:px-3 sm:py-2',
+                     link.href
+                    ? 'text-white bg-gray-400 dark:bg-primary'
+                    : 'hover:bg-gray-600 dark:hover:bg-primary'
+                )}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-              </svg>
-            )}
-          </button>
-        </div>
-
-        {/* Navigation Menu (visible on medium and above screens) */}
-        <nav className="hidden md:flex space-x-4 mr-8 sm:mr-32">
-          <Link href="/" className="hover:underline text-white">
-            Home
-          </Link>
-          <Link href="/about" className="hover:underline text-white">
-            About Me
-          </Link>
-          <Link href="/connect" className="hover:underline text-white">
-            Connect
-          </Link>
-        </nav>
-
-        {/* Call-to-action buttons (visible on medium and above screens) */}
-        {/* <div className="hidden md:flex space-x-4">
-          {ctas.map((cta, index) => (
-            <Link key={index} href={cta.href} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-              {cta.label}
-            </Link>
-          ))}
-        </div> */}
-      </div>
-
-      {/* Mobile Menu (visible when hamburger menu is clicked) */}
-      {menuOpen && (
-        <div className="md:hidden bg-gray-900">
-          <nav className="flex flex-col space-y-2 p-4">
-            <Link href="/" className="hover:underline text-white">
-              Home
-            </Link>
-            <Link href="/about" className="hover:underline text-white">
-              About
-            </Link>
-            <Link href="/services" className="hover:underline text-white">
-              Services
-            </Link>
-          </nav>
-
-          {/* <div className="flex flex-col space-y-2 p-4">
-            {ctas.map((cta, index) => (
-              <Link key={index} href={cta.href} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                {cta.label}
+                {link.title}
               </Link>
             ))}
-          </div> */}
+          </div>
+          <AnalyticsLink />
+          <ThemeSwitch />
+          <MobileNav />
         </div>
-      )}
+      </div>
     </header>
+    </div>
   );
-}
+};
+
+export default Header;
