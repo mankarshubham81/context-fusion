@@ -18,7 +18,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
           <img
             src={imageUrl}
             alt={title}
-            className="w-full h-64 object-cover transition-transform hover:scale-100"
+            className="w-full h-34 object-cover transition-transform hover:scale-100"
           />
           <div className="p-4 relative">
             <h2 className="text-2xl font-bold mb-2">{title}</h2>

@@ -22,3 +22,26 @@ const CustomLink = ({
 };
 
 export default CustomLink;
+
+// link: ({ children, value }: PortableTextMarkComponentProps<{ href?: string }>) => {
+//   const href = value?.href;
+
+//   if (!href) {
+//     // If href is not provided, render the children without a link
+//     return <span>{children}</span>;
+//   }
+
+//   // Determine if the link is external
+//   const isExternal = href.startsWith('http');
+
+//   return (
+//     <a
+//       href={href}
+//       target={isExternal ? '_blank' : undefined}
+//       rel={isExternal ? 'noopener noreferrer' : undefined}
+//       className="text-blue-500 hover:underline"
+//     >
+//       {children}
+//     </a>
+//   );
+// }

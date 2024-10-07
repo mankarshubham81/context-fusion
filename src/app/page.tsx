@@ -1,4 +1,7 @@
+// pages/index.tsx or app/page.tsx (depending on your Next.js setup)
+
 "use client";
+
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import CategoryList from '../components/CategoryList';
@@ -7,54 +10,8 @@ import Pagination from '../components/Pagination';
 import Footer from '../components/Footer';
 import Head from 'next/head';
 import { client as sanityClient } from '../sanity/lib/client';
-// import client from '../sanity'; // Import the Sanity client
+import { BlogPostData, Category } from '../app/types';
 
-
-// Define a type for the mainImage field
-type MainImage = {
-  asset: {
-    url: string;
-  };
-  alt: string;
-};
-
-// Define a type for categories
-type Category = {
-  title: string;
-  slug: string;
-};
-
-// Define the blog post data type
-interface BlogPostData {
-  title: string;
-  slug: { current: string };
-  authorName: string;
-  mainImage: MainImage; // Use the defined MainImage type
-  categories: Category[];
-  publishedAt: string;
-  excerpt: string;
-  readingTime: number;
-  body?: string;
-}
-
-// type BlogPost = {
-//   slug: { current: string };
-//   title: string;
-//   content: string;  // or the equivalent field in your Sanity schema
-//   category: { title: string }[];
-//   publishedAt: string;
-//   author: { name: string };
-//   mainImage: {
-//     asset: { url: string };
-//     alt: string;
-//   };
-// };
-
-
-const categories = ["All", "Technology", "Lifestyle", "Business", "Travel", "Food", "Anime"];
-
-
-// GROQ query to fetch the blog posts from Sanity
 const query = `*[_type == "post"]{
   title,
   slug,
@@ -64,7 +21,8 @@ const query = `*[_type == "post"]{
     alt
   },
   categories[]->{
-    title
+    title,
+    slug
   },
   publishedAt,
   excerpt,
@@ -76,61 +34,50 @@ const categoriesQuery = `*[_type == "category"]{
   slug
 }`;
 
-
-// // Fetch all categories
-// const getAllCategories = async (): Promise<Category[]> => {
-//   const categories: Category[] = await sanityClient.fetch(categoriesQuery);
-//   return categories;
-// };
-
 const Home = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredPosts, setFilteredPosts] = useState<BlogPostData[]>([]);
   const [allPosts, setAllPosts] = useState<BlogPostData[]>([]);
   const [allCategories, setAllCategories] = useState<Category[]>([]);
-  const postsPerPage = 4; // 2x2 grid means 4 posts per page
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const postsPerPage = 6; // Number of posts per page
 
-
-  // Fetch posts from Sanity
+  // Fetch posts and categories from Sanity
   useEffect(() => {
     const fetchData = async () => {
-      const data = await sanityClient.fetch(query);
-      const allCategoriesData = await sanityClient.fetch(categoriesQuery);
-      console.log("000 aaa")
-      console.log("102",allCategoriesData)
-      setAllPosts(data);
-      setAllCategories(allCategoriesData);
-      setFilteredPosts(data); // Initial load shows all posts
+      try {
+        const data: BlogPostData[] = await sanityClient.fetch(query);
+        const allCategoriesData: Category[] = await sanityClient.fetch(categoriesQuery);
+        console.log('Fetched posts:', data);
+        console.log('Fetched categories:', allCategoriesData);
+        setAllPosts(data);
+        setAllCategories(allCategoriesData);
+        setFilteredPosts(data); // Initial load shows all posts
+      } catch (error) {
+        console.error('Error fetching data from Sanity:', error);
+      }
     };
     fetchData();
   }, []);
 
-  // Function to filter posts by category and search term
-  const filterPosts = () => {
+  // Filter posts by category and search term
+  useEffect(() => {
     let updatedPosts = selectedCategory === 'All'
       ? allPosts
       : allPosts.filter((post) =>
-          post.categories.some((cat: any) => cat.title === selectedCategory)
+          post.categories.some((cat: Category) => cat.title === selectedCategory)
         );
-    console.log("pppp", allPosts)
-    console.log("aaaaa", updatedPosts)
+
     if (searchTerm.trim()) {
       updatedPosts = updatedPosts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-    console.log("cccccc", updatedPosts)
 
-    return updatedPosts;
-  };
-
-  useEffect(() => {
-    const filtered = filterPosts();
-    setFilteredPosts(filtered);
-    setCurrentPage(1); // Reset to the first page when search or category changes
+    setFilteredPosts(updatedPosts);
+    setCurrentPage(1); // Reset to the first page when filters change
   }, [searchTerm, selectedCategory, allPosts]);
 
   // Pagination logic
@@ -141,7 +88,6 @@ const Home = () => {
 
   const handleCategoryClick = (category: string) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Reset to the first page when category changes
   };
 
   const handlePageChange = (newPage: number) => {
@@ -149,50 +95,63 @@ const Home = () => {
   };
 
   return (
-    <div className=" mt-8">
+    <div className="bg-black min-h-screen">
       <Head>
         <title>My Blog | Best SEO Practices</title>
-        <meta name="description" content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business." />
-        <meta name="keywords" content="Next.js, blog, SEO, lifestyle, business" />
+        <meta
+          name="description"
+          content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business."
+        />
+        <meta
+          name="keywords"
+          content="Next.js, blog, SEO, lifestyle, business"
+        />
         <meta name="author" content="John Doe" />
       </Head>
 
-      {/* <Navbar /> */}
+      <Navbar />
 
-      <main className="container mx-auto py-10 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+      <main className="container mx-auto py-4 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {/* Categories Section */}
           <aside className="md:col-span-1">
-            <CategoryList categories={allCategories} onCategoryClick={handleCategoryClick} />
+            <CategoryList
+              categories={allCategories}
+              onCategoryClick={handleCategoryClick}
+            />
           </aside>
 
           {/* Blog Posts Section */}
           <section className="md:col-span-3">
             {/* Search Bar */}
-            <div className="mb-6">
+            <div className="mb-4">
               <input
                 type="text"
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 text-black bg-gray-200 dark:bg-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-customBlue shadow-md"
+                className="w-full p-3 bg-gray-700 rounded-md shadow-sm focus:outline-none text-gray-100 focus:ring-2 focus:ring-customBlue"
               />
             </div>
 
             {/* Blog Post Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
               {currentPosts.length > 0 ? (
-                currentPosts.map((post, index) => (
+                currentPosts.map((post) => (
+                  <div
+                    key={post.slug.current} // Use slug as key for uniqueness
+                    className="bg-gray-900 transition-transform duration-300 rounded-md shadow-lg hover:scale-105"
+                  >
                     <BlogPost
                       slug={post.slug.current}
-                      key={index}
                       title={post.title}
                       excerpt={post.excerpt}
-                      category={post.categories.map((cat: any) => cat.title).join(', ')}
-                      date={new Date(post.publishedAt).toDateString()}
+                      category={post.categories.map((cat) => cat.title).join(', ')}
+                      date={new Date(post.publishedAt).toLocaleDateString()}
                       author={post.authorName}
                       imageUrl={post.mainImage.asset.url}
                     />
+                  </div>
                 ))
               ) : (
                 <p className="text-gray-300">No posts found.</p>
@@ -201,7 +160,7 @@ const Home = () => {
 
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="mt-8 flex bg-gray-900 pb-5 rounded-md justify-center">
+              <div className="mt-8 flex justify-center">
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
