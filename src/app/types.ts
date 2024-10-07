@@ -1,3 +1,6 @@
+// import { PortableTextBlock as PTBlock, PortableTextMarkDefinition, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
+import { PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
+
 // export interface BlogPost {
 //     title: string;
 //     slug: string;
@@ -101,6 +104,27 @@ export interface PortableTextBlock extends PTBlock {}
  * Represents the definition of a link mark.
  * Extends PortableTextMarkDefinition to include the 'href' property.
  */
+// export interface LinkMarkDefinition extends PortableTextMarkDefinition {
+//   href?: string;
+// }
+
+export interface PortableTextBlock extends PTBlock {
+  children: (ArbitraryTypedObject | PortableTextSpan)[];
+}
+
+/**
+ * Represents the definition of a link mark.
+ */
 export interface LinkMarkDefinition extends PortableTextMarkDefinition {
+  _type: 'link';
   href?: string;
+}
+
+/**
+ * Represents the definition of a video block.
+ */
+export interface VideoBlock extends PTBlock {
+  _type: 'video';
+  url: string; // URL of the video (e.g., YouTube, Vimeo, or direct video file)
+  title?: string; // Optional title for the video
 }

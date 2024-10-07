@@ -1,7 +1,8 @@
 // components/PortableText.tsx
+
 'use client'; // Ensure this is a Client Component
 
-import React from 'react';
+import React, { useState } from 'react';
 import {
   PortableText as PortableTextComponent,
   PortableTextComponents,
@@ -9,9 +10,16 @@ import {
   PortableTextComponentProps,
 } from '@portabletext/react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import {
+  dracula,
+  okaidia,
+  coy,
+  prism,
+} from 'react-syntax-highlighter/dist/cjs/styles/prism'; // Import multiple styles if needed
 import Image from 'next/image';
-import { PortableTextBlock, LinkMarkDefinition  } from '../app/types'; // Adjust the path as necessary
+import { PortableTextBlock, LinkMarkDefinition, VideoBlock } from '../app/types'; // Adjust the path as necessary
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { FaCopy, FaCheck } from 'react-icons/fa'; // Icons for copy button
 
 // Define specific interfaces for type safety
 interface CodeBlockValue {
@@ -26,15 +34,64 @@ interface ImageBlockValue {
   alt?: string;
 }
 
+interface VideoBlockValue extends VideoBlock {}
+
 const components: Partial<PortableTextComponents> = {
   types: {
     code: ({ value }: { value: CodeBlockValue }) => {
-      const validLanguages = ['javascript', 'typescript', 'html', 'css', 'python'];
+      const validLanguages = [
+        'javascript',
+        'typescript',
+        'python',
+        'java',
+        'c',
+        'cpp',
+        'csharp',
+        'ruby',
+        'go',
+        'php',
+        'swift',
+        'kotlin',
+        'rust',
+        'scala',
+        'perl',
+        'sql',
+        'bash',
+        'html',
+        'css',
+        'json',
+        'markdown',
+        'yaml',
+        'shell',
+        'docker',
+        'graphql',
+        'jsx',
+        'tsx',
+        // Add more languages as needed
+      ];
       const language = value.language && validLanguages.includes(value.language) ? value.language : 'text';
+      
+      const [copied, setCopied] = useState(false);
+      
+      const handleCopy = () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
+      };
+      
       return (
-        <SyntaxHighlighter language={language} style={dracula}>
-          {value.code}
-        </SyntaxHighlighter>
+        <div className="relative">
+          <CopyToClipboard text={value.code} onCopy={handleCopy}>
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              aria-label="Copy code"
+            >
+              {copied ? <FaCheck /> : <FaCopy />}
+            </button>
+          </CopyToClipboard>
+          <SyntaxHighlighter language={language} style={dracula} showLineNumbers>
+            {value.code}
+          </SyntaxHighlighter>
+        </div>
       );
     },
     image: ({ value }: { value: ImageBlockValue }) => {
@@ -48,10 +105,61 @@ const components: Partial<PortableTextComponents> = {
             height={600}
             className="rounded"
             loading="lazy"
+            // Uncomment and ensure fallback image exists
             // onError={(e) => {
-            //   e.currentTarget.src = '/fallback-image.jpg'; // Ensure this fallback image exists in your public directory
+            //   e.currentTarget.src = '/fallback-image.jpg';
             // }}
           />
+        </div>
+      );
+    },
+    video: ({ value }: { value: VideoBlockValue }) => {
+      // Validate the video URL format
+      const isYouTube = value.url.includes('youtube.com') || value.url.includes('youtu.be');
+      const isVimeo = value.url.includes('vimeo.com');
+      
+      const getYouTubeEmbedUrl = (url: string) => {
+        const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
+        const match = url.match(regex);
+        return match ? `https://www.youtube.com/embed/${match[1]}` : null;
+      };
+      
+      const getVimeoEmbedUrl = (url: string) => {
+        const regex = /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/(?:\w+\/)?videos\/|video\/|)(\d+)/i;
+        const match = url.match(regex);
+        return match ? `https://player.vimeo.com/video/${match[1]}` : null;
+      };
+      
+      let embedUrl: string | null = null;
+      
+      if (isYouTube) {
+        embedUrl = getYouTubeEmbedUrl(value.url);
+      } else if (isVimeo) {
+        embedUrl = getVimeoEmbedUrl(value.url);
+      } else {
+        // Assume direct video file
+        embedUrl = value.url;
+      }
+      
+      if (!embedUrl) return null;
+      
+      return (
+        <div className="my-8 aspect-video">
+          {isYouTube || isVimeo ? (
+            <iframe
+              src={embedUrl}
+              title={value.title || 'Embedded Video'}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="w-full h-full rounded"
+            ></iframe>
+          ) : (
+            <video controls className="w-full h-full rounded">
+              <source src={embedUrl} />
+              Your browser does not support the video tag.
+            </video>
+          )}
         </div>
       );
     },
@@ -109,9 +217,13 @@ const PortableText: React.FC<PortableTextProps> = ({ content }) => {
     return <p>No content available.</p>;
   }
 
-  // Filter out invalid blocks
+  // Filter out invalid blocks, including those without children
   const validContent = content.filter(
-    (block) => block && typeof block === 'object' && '_type' in block && '_key' in block
+    (block) =>
+      block &&
+      typeof block === 'object' &&
+      '_type' in block &&
+      '_key' in block
   );
 
   if (validContent.length === 0) {
