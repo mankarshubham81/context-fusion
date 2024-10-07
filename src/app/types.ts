@@ -48,7 +48,7 @@ export interface BlogPost {
       alt?: string;
     };
     categories: string[];
-    body: Block[];
+    body: PortableTextBlock[];
   }
   
   export interface Block {
