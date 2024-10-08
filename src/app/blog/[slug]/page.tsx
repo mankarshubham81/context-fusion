@@ -29,7 +29,7 @@ const Blog = async ({ params }: BlogProps) => {
     }`;
 
   const post: BlogPost = await sanityClient.fetch(query, { slug });
-  console.log("ppp",post)
+  // console.log("ppp",post)
 
   if (!post) {
     notFound();

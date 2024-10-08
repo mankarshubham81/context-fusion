@@ -51,7 +51,7 @@ export default function Footer() {
     const fetchFooterData = async () => {
       // Replace with actual data fetching logic if needed
       setFooterData(sampleFooterData);
-      console.log('footerData:', sampleFooterData);
+      // console.log('footerData:', sampleFooterData);
     };
 
     fetchFooterData();

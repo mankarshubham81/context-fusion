@@ -13,7 +13,7 @@ import Image from 'next/image';
 import { PortableTextBlock, LinkMarkDefinition } from '../app/types'; // Adjust the path as necessary
 // import { PortableTextBlock, LinkMarkDefinition, VideoBlock } from '../app/types'; // Adjust the path as necessary
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { FaCopy, FaCheck } from 'react-icons/fa'; // Icons for copy button
+import { FaRegCopy, FaCheck } from 'react-icons/fa'; // Icons for copy button
 
 // Define specific interfaces for type safety
 interface CodeBlockValue {
@@ -78,13 +78,14 @@ const CodeBlock: React.FC<{ value: CodeBlockValue }> = ({ value }) => {
   return (
     <div className="relative">
       <CopyToClipboard text={value.code} onCopy={handleCopy}>
-        <button
-          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-          aria-label="Copy code"
-        >
-          {copied ? <FaCheck /> : <FaCopy />}
-        </button>
-      </CopyToClipboard>
+          <button
+            className="flex align-middle items-center absolute top-2 right-2 rounded text-gray-200 bg-gray-900 p-2"
+            aria-label="Copy code"
+          >
+            {copied ? <FaCheck className='mx-2' /> : <FaRegCopy className='mx-2' />}
+            <span className="text-m px-1">{copied ? 'Copied' : 'Copy code'}</span>
+          </button>
+        </CopyToClipboard>
       <SyntaxHighlighter language={language} style={dracula} showLineNumbers>
         {value.code}
       </SyntaxHighlighter>

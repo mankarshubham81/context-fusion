@@ -1,7 +1,7 @@
 // components/BlogPost.tsx
 import Link from 'next/link';
 import Image from 'next/image';
-
+import Head from 'next/head';
 
 interface BlogPostProps {
   title: string;
@@ -15,33 +15,90 @@ interface BlogPostProps {
 
 const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: BlogPostProps) => {
   return (
-    <article className="relative h-full rounded-lg bg-gray-200 dark:bg-gray-800 dark:text-gray-200 overflow-hidden shadow-lg">
-      <Link href={`/blog/${slug}`}>
-          <Image
-            src={imageUrl}
-            className="w-full h-auto object-cover"
-            loading="lazy"
-            width={200}
-            alt={title || "blog Image"}
-            height={100}
-            // Uncomment and ensure fallback image exists
-            // onError={(e) => {
-            //   e.currentTarget.src = '/fallback-image.jpg';
-            // }}
-          />
-          <div className="p-4">
-            <h2 className="text-2xl font-bold mb-2">{title}</h2>
-            <p className="text-gray-500 mb-1">
-              {date} by {author}
-            </p>
-            <p className="text-gray-500 mb-1">Category: {category}</p>
-            <p className="dark:text-gray-300 text-gray-900">{excerpt}</p>
-            <p className="flex float-end  absolute bottom-2 right-2 text-customBlue font-semibold">
-            {category}
-          </p>
-          </div>
-      </Link>
-    </article>
+    <>
+      {/* SEO and Metadata for Google */}
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={excerpt} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={excerpt} />
+        <meta property="og:image" content={imageUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://context-fusion.vercel.app/blog/${slug}`} />
+        <meta name="twitter:card" content={title} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={excerpt} />
+        <meta name="twitter:image" content={imageUrl} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BlogPosting',
+              headline: title,
+              description: excerpt,
+              image: imageUrl,
+              author: {
+                '@type': 'Person',
+                name: author,
+              },
+              datePublished: date,
+              publisher: {
+                '@type': 'Organization',
+                name: 'Your Blog Name',
+                logo: {
+                  '@type': 'ImageObject',
+                  url: 'https://yourwebsite.com/logo.jpg', // Add your website logo URL
+                },
+              },
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': `https://yourwebsite.com/blog/${slug}`,
+              },
+            }),
+          }}
+        />
+      </Head>
+
+      {/* Blog Post Layout */}
+      <article className="relative h-full rounded-lg bg-white dark:bg-gray-900 dark:text-gray-100 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+        <Link href={`/blog/${slug}`} className="block">
+            <header className="relative">
+              <Image
+                src={imageUrl}
+                className="w-full h-56 object-cover lg:h-64"
+                loading="lazy"
+                width={800}
+                height={450}
+                alt={title} // Ensure good alt text for accessibility
+              />
+            </header>
+            <div className="p-6">
+              <h1 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
+                {title}
+              </h1>
+              <div className="flex items-center text-sm text-gray-500 mb-2">
+                <time dateTime={new Date(date).toISOString()} itemProp="datePublished">
+                  {date}
+                </time>
+                <span className="mx-2">•</span>
+                <span itemProp="author">{author}</span>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                {excerpt}
+              </p>
+              <div className="flex justify-between items-center">
+                <span className="text-customBlue text-sm font-semibold">
+                  {category}
+                </span>
+                <button className="text-customBlue text-sm font-semibold underline">
+                  Read More
+                </button>
+              </div>
+            </div>
+        </Link>
+      </article>
+    </>
   );
 };
 

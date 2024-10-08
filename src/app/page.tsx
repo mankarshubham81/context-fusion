@@ -49,8 +49,8 @@ const Home = () => {
       try {
         const data: BlogPostData[] = await sanityClient.fetch(query);
         const allCategoriesData: Category[] = await sanityClient.fetch(categoriesQuery);
-        console.log('Fetched posts:', data);
-        console.log('Fetched categories:', allCategoriesData);
+        // console.log('Fetched posts:', data);
+        // console.log('Fetched categories:', allCategoriesData);
         setAllPosts(data);
         setAllCategories(allCategoriesData);
         setFilteredPosts(data); // Initial load shows all posts
