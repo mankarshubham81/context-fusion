@@ -36,13 +36,13 @@ const Header = () => {
 
   return (
     <div>
-    <header className="supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-gray-300 text-black py-4 backdrop-blur dark:dark:bg-gray-900 dark:text-white">
+    <header className="supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-gray-200 text-black py-4 backdrop-blur dark:dark:bg-gray-900 dark:text-white">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-3 xl:max-w-5xl xl:px-0">
         <Link href="/" aria-label="Context Fusion" className="flex items-center">
           <div className="animate-wave">Logo</div>
           <div className="group ml-2 text-xl font-bold transition duration-300 text-customBlue">
             Context Fusion
-            <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[85%] bg-gray-300  dark:dark:bg-gray-900 dark:text-white"></span>
+            <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[85%] bg-gray-200  dark:dark:bg-gray-900 dark:text-white"></span>
           </div>
         </Link>
         <div className="flex items-center text-base leading-5">
@@ -54,7 +54,7 @@ const Header = () => {
                 className={clsx(
                   'mx-1 rounded px-2 py-1 font-medium sm:px-3 sm:py-2',
                      link.href
-                    ? 'text-white bg-gray-400 dark:bg-primary'
+                    ? 'text-black bg-gray-200 dark:bg-primary'
                     : 'hover:bg-gray-600 dark:hover:bg-primary'
                 )}
               >

@@ -95,7 +95,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen">
+    <div className="bg-gray-200 min-h-screen">
       <Head>
         <title>My Blog | Best SEO Practices</title>
         <meta
@@ -112,7 +112,7 @@ const Home = () => {
       <Navbar />
 
       <main className="container mx-auto py-4 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-14">
           {/* Categories Section */}
           <aside className="md:col-span-1">
             <CategoryList
@@ -130,7 +130,7 @@ const Home = () => {
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 bg-gray-700 rounded-md shadow-sm focus:outline-none text-gray-100 focus:ring-2 focus:ring-customBlue"
+                className="w-full p-3 bg-gray-300 dark:bg-gray-700 rounded-md shadow-sm focus:outline-none text-black focus:ring-2 focus:ring-customBlue"
               />
             </div>
 
@@ -140,7 +140,7 @@ const Home = () => {
                 currentPosts.map((post) => (
                   <div
                     key={post.slug.current} // Use slug as key for uniqueness
-                    className="bg-gray-900 transition-transform duration-300 rounded-md shadow-lg hover:scale-105"
+                    className="transition-transform duration-300 rounded-md shadow-lg hover:scale-105"
                   >
                     <BlogPost
                       slug={post.slug.current}
