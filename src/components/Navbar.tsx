@@ -36,7 +36,7 @@ const Header = () => {
 
   return (
     <div>
-    <header className="supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-gray-200 text-black py-4 backdrop-blur dark:dark:bg-gray-900 dark:text-white">
+    <header className="supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-gray-200 text-black py-4 backdrop-blur dark:dark:bg-gray-900 dark:text-white border-b-2 shadow-lg border-gray-300 dark:border-none">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-3 xl:max-w-5xl xl:px-0">
         <Link href="/" aria-label="Context Fusion" className="flex items-center">
           <div className="animate-wave">Logo</div>

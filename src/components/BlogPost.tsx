@@ -15,10 +15,8 @@ interface BlogPostProps {
 
 const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: BlogPostProps) => {
   return (
-    <article className="relative  shadow-lg h-full rounded-lg bg-gray-200 dark:bg-gray-800 dark:text-gray-200 overflow-hidden shadow-lg">
+    <article className="relative h-full rounded-lg bg-gray-200 dark:bg-gray-800 dark:text-gray-200 overflow-hidden shadow-lg">
       <Link href={`/blog/${slug}`}>
-          <img
-          />
           <Image
             src={imageUrl}
             className="w-full h-auto object-cover"

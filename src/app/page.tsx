@@ -95,7 +95,7 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gray-200 min-h-screen">
+    <div className="bg-gray-200 dark:bg-gray-950 min-h-screen">
       <Head>
         <title>My Blog | Best SEO Practices</title>
         <meta
@@ -130,7 +130,7 @@ const Home = () => {
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 bg-gray-300 dark:bg-gray-700 rounded-md shadow-sm focus:outline-none text-black focus:ring-2 focus:ring-customBlue"
+                className="w-full p-3 bg-transparent placeholder-balck border-gray-400  dark:bg-gray-800 rounded-md shadow-sm focus:outline-none text-black focus:ring-2 focus:ring-gray-500 dark:focus:ring-customBlue"
               />
             </div>
 
