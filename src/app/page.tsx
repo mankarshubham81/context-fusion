@@ -111,10 +111,10 @@ const Home = () => {
 
       <Navbar />
 
-      <main className="container mx-auto py-4 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-14">
+      <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-2 md:mx-2 py-4 px-4">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-14">
           {/* Categories Section */}
-          <aside className="md:col-span-1">
+          <aside className="md:col-span-2 sm:col-span-1">
             <CategoryList
               categories={allCategories}
               onCategoryClick={handleCategoryClick}
@@ -122,7 +122,7 @@ const Home = () => {
           </aside>
 
           {/* Blog Posts Section */}
-          <section className="md:col-span-3">
+          <section className="md:col-span-4">
             {/* Search Bar */}
             <div className="mb-4">
               <input
@@ -130,7 +130,7 @@ const Home = () => {
                 placeholder="Search blog posts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 bg-transparent placeholder-balck border-gray-400  dark:bg-gray-800 rounded-md shadow-sm focus:outline-none text-black focus:ring-2 focus:ring-gray-500 dark:focus:ring-customBlue"
+                className="w-full p-3 bg-white placeholder-balck  dark:bg-gray-800 rounded-md shadow-xl focus:outline-none text-black focus:ring-2 focus:ring-gray-500 dark:focus:ring-customBlue"
               />
             </div>
 

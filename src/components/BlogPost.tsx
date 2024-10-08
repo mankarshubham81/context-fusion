@@ -61,7 +61,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
       </Head>
 
       {/* Blog Post Layout */}
-      <article className="relative h-full rounded-lg bg-white dark:bg-gray-900 dark:text-gray-100 overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+      <article className="relative h-full rounded-lg bg-white dark:bg-gray-900 dark:text-gray-100 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
         <Link href={`/blog/${slug}`} className="block">
             <header className="relative">
               <Image

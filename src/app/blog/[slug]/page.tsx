@@ -42,7 +42,7 @@ const Blog = async ({ params }: BlogProps) => {
         <meta name="description" content={post.excerpt} />
         {/* Add more SEO tags as needed */}
       </Head>
-      <article className="max-w-3xl mx-auto p-4">
+      <article className="max-w-3xl mx-auto mt-16 p-4">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         <div className="flex items-center mb-6">
           <span className="text-gray-600">By {post.author || 'Unknown Author'}</span>
