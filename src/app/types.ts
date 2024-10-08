@@ -1,5 +1,5 @@
 // import { PortableTextBlock as PTBlock, PortableTextMarkDefinition, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
-import { PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
+import { PortableTextBlock as PTBlock, PortableTextSpan, ArbitraryTypedObject, PortableTextMarkDefinition } from '@portabletext/types';
 
 // export interface BlogPost {
 //     title: string;
@@ -51,16 +51,16 @@ export interface BlogPost {
     body: PortableTextBlock[];
   }
   
-  export interface Block {
-    _key: string;
-    _type: string;
-    children?: Child[];
-    markDefs?: any[];
-    style?: string;
-    code?: string;
-    language?: string;
-    h1: string;
-  }
+  // export interface Block {
+  //   _key: string;
+  //   _type: string;
+  //   children?: Child[];
+  //   markDefs?: any[];
+  //   style?: string;
+  //   code?: string;
+  //   language?: string;
+  //   h1: string;
+  // }
 
  export interface BlogPostData {
     title: string;
@@ -93,12 +93,12 @@ export interface BlogPost {
     slug: string;
   };
 
-  import { PortableTextBlock as PTBlock, PortableTextMarkDefinition } from '@portabletext/types';
+  // import { PortableTextBlock as PTBlock, PortableTextMarkDefinition } from '@portabletext/types';
 
 /**
  * Represents a single block of Portable Text content.
  */
-export interface PortableTextBlock extends PTBlock {}
+// export interface PortableTextBlock extends PTBlock {}
 
 /**
  * Represents the definition of a link mark.

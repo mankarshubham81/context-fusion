@@ -1,5 +1,7 @@
 // components/BlogPost.tsx
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 interface BlogPostProps {
   title: string;
@@ -16,9 +18,18 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
     <article className="shadow-lg rounded-lg bg-gray-200 dark:bg-gray-800 dark:text-gray-200 overflow-hidden shadow-lg">
       <Link href={`/blog/${slug}`}>
           <img
+          />
+          <Image
             src={imageUrl}
-            alt={title}
             className="w-full h-34 object-cover transition-transform hover:scale-100"
+            loading="lazy"
+            width={200}
+            alt={title || "blog Image"}
+            height={100}
+            // Uncomment and ensure fallback image exists
+            // onError={(e) => {
+            //   e.currentTarget.src = '/fallback-image.jpg';
+            // }}
           />
           <div className="p-4 relative">
             <h2 className="text-2xl font-bold mb-2">{title}</h2>

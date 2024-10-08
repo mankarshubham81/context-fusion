@@ -1,4 +1,5 @@
-'use client';
+// components/PortableText.tsx
+'use client'; // Ensure this is a Client Component
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -6,72 +7,54 @@ import { useEffect, useState } from 'react';
 // import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
 // import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
-
 // import { FETCH_FOOTER } from './../../../sanity/queries/footer/fetch-footer';
-
-export interface IFooterProps {}
-
 interface SocialIconProps {
   href: string;
   icon: JSX.Element;
 }
 
-
 interface UsefulLink {
-    _key: string;
-    usefulLinkName: string;
-    usefulLinkPath: string;
-  }
-  
-  // Type for the footer data structure
-  interface FooterData {
-    usefulLinks: UsefulLink[];
-  }
-// interface FooterLinkProps {
-//   href: string;
-//   children: string;
-// }
+  _key: string;
+  usefulLinkName: string;
+  usefulLinkPath: string;
+}
 
-const sampleFooterData = {
-    usefulLinks: [
-      {
-        _key: '1',
-        usefulLinkName: 'Home',
-        usefulLinkPath: '/',
-      },
-      {
-        _key: '2',
-        usefulLinkName: 'About Me',
-        usefulLinkPath: '/about',
-      },
-      {
-        _key: '3',
-        usefulLinkName: 'Connect',
-        usefulLinkPath: '/Connect',
-      },
-    ]
-  };
-  
+// Type for the footer data structure
+interface FooterData {
+  usefulLinks: UsefulLink[];
+}
 
-export default function Footer(_props: IFooterProps) {
-  const [footerData, setFooterData] = useState<FooterData>();
+const sampleFooterData: FooterData = {
+  usefulLinks: [
+    {
+      _key: '1',
+      usefulLinkName: 'Home',
+      usefulLinkPath: '/',
+    },
+    {
+      _key: '2',
+      usefulLinkName: 'About Me',
+      usefulLinkPath: '/about',
+    },
+    {
+      _key: '3',
+      usefulLinkName: 'Connect',
+      usefulLinkPath: '/connect',
+    },
+  ],
+};
+
+export default function Footer() {
+  const [footerData, setFooterData] = useState<FooterData | undefined>();
 
   useEffect(() => {
-    const fetchHeaderData = async () => {
-    //   const footerDataResult = await client.fetch<FETCH_FOOTERResult>(FETCH_FOOTER);
+    const fetchFooterData = async () => {
+      // Replace with actual data fetching logic if needed
       setFooterData(sampleFooterData);
-      console.log('footerDataResult ff', sampleFooterData);
-      // setHeaderData(headerDataResult);
-      // const logoAsset = headerDataResult?.logo?.asset;
-      // if (logoAsset !== undefined) {
-      //   const imageUrl = fetchImageURL(logoAsset._ref);
-      //   setLogoUrl(imageUrl);
-      // } else {
-      //   // TODO: SET BACKUP local IMAGE WITH setLogoUrl(imageUrl);
-      // }
+      console.log('footerData:', sampleFooterData);
     };
 
-    fetchHeaderData();
+    fetchFooterData();
   }, []);
 
   return (
@@ -81,30 +64,23 @@ export default function Footer(_props: IFooterProps) {
           {/* Section 1: Company Logo and Page Links */}
           <div className="flex flex-col justify-between items-center md:items-center">
             {/* <img src="/logo.png" alt="Company Logo" className="w-20 mb-4" /> */}
-            <h1 className="text-bold mb-4">Company Logo </h1>
+            <h1 className="text-bold mb-4">Company Logo</h1>
             <ul className="text-center">
-              {footerData?.usefulLinks?.map(({ _key, usefulLinkName, usefulLinkPath }: {_key: string, usefulLinkName: string, usefulLinkPath: string}) => (
+              {footerData?.usefulLinks.map(({ _key, usefulLinkName, usefulLinkPath }) => (
                 <li key={_key} className="mb-2 mt-1">
-                  <Link className="hover:underline" href={`${usefulLinkPath?.toString()}`}>
+                  <Link className="hover:underline" href={usefulLinkPath}>
                     {usefulLinkName}
                   </Link>
                 </li>
               ))}
-              {/* // <FooterLink key={_key} href={`${usefulLinkPath?.toString()}`}>
-              //   {usefulLinkName}
-              // </FooterLink> */}
-              {/* <FooterLink href="/">Home</FooterLink>
-              <FooterLink href="/services">Services</FooterLink>
-              <FooterLink href="/contact">Contact</FooterLink> */}
             </ul>
           </div>
 
           {/* Section 2: Address */}
           <div className="text-center">
             <h3 className="text-lg font-semibold mb-4">Address</h3>
-            <p className="mb-2">{"Chatrapati colony"}</p>
-            <p className="mb-2">{"Chatrapati Sambhajinagar, Mahahashtra"}</p>
-            {/* <p className="mb-2">Country</p> */}
+            <p className="mb-2">Chatrapati colony</p>
+            <p className="mb-2">Chatrapati Sambhajinagar, Maharashtra</p>
             <p>{"+917391014689"}</p>
           </div>
 
@@ -129,16 +105,8 @@ export default function Footer(_props: IFooterProps) {
   );
 }
 
-// const FooterLink: React.FC<FooterLinkProps> = ({ href, children }) => (
-//   <li className="mb-2">
-//     <Link href={href} className="hover:underline">
-//       {children}
-//     </Link>
-//   </li>
-// );
-
 const SocialIcon: React.FC<SocialIconProps> = ({ href, icon }) => (
-  <a href={href} className="hover:text-blue-500">
+  <a href={href} className="hover:text-blue-500" target="_blank" rel="noopener noreferrer">
     {icon}
   </a>
 );
