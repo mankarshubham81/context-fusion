@@ -11,6 +11,8 @@ import Footer from '../components/Footer';
 import Head from 'next/head';
 import { client as sanityClient } from '../sanity/lib/client';
 import { BlogPostData, Category } from '../app/types';
+import { FaSearch} from 'react-icons/fa';
+
 
 const query = `*[_type == "post"]{
   title,
@@ -124,14 +126,17 @@ const Home = () => {
           {/* Blog Posts Section */}
           <section className="md:col-span-4">
             {/* Search Bar */}
-            <div className="mb-4">
-              <input
-                type="text"
-                placeholder="Search blog posts..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full p-3 bg-white placeholder-balck  dark:bg-gray-800 rounded-md shadow-xl focus:outline-none text-black focus:ring-2 focus:ring-gray-500 dark:focus:ring-customBlue"
-              />
+            <div className="relative">
+              <div className="mb-4 flex items-center">
+                <FaSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 dark:text-gray-300" />
+                <input
+                  type="text"
+                  placeholder={`Search blog posts...`}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 w-full p-3 bg-white placeholder-black dark:placeholder-white dark:bg-gray-800 rounded-md shadow-xl focus:outline-none dark:text-gray-200 text-black focus:ring-2 focus:ring-gray-500 dark:focus:ring-customBlue"
+                />
+              </div>
             </div>
 
             {/* Blog Post Grid */}

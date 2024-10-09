@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 // import { client } from '@/sanity/lib/client';
 // import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
 // import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
-import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
+import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 // import { FETCH_FOOTER } from './../../../sanity/queries/footer/fetch-footer';
 interface SocialIconProps {
   href: string;
@@ -88,10 +88,10 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-center">
             <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
             <div className="flex space-x-6">
-              <SocialIcon href="https://www.facebook.com/chandrashekhar.mahamuni" icon={<FaFacebook size={'25px'} />} />
-              <SocialIcon href="#" icon={<FaTwitter size={'25px'} />} />
-              <SocialIcon href="#" icon={<FaInstagram size={'25px'} />} />
-              <SocialIcon href="https://www.youtube.com/user/shekharmahamuni/featured" icon={<FaYoutube size={'25px'} />} />
+              <SocialIcon href="https://github.com/mankarshubham81/mankarshubham81" icon={<FaGithub size={'25px'} />} />
+              <SocialIcon href="https://in.linkedin.com/in/mankarshubham81" icon={<FaLinkedin size={'25px'} />} />
+              <SocialIcon href="https://www.instagram.com/mankarshubham81/" icon={<FaInstagram size={'25px'} />} />
+              <SocialIcon href="https://twitter.com/mankarshubham81" icon={<FaTwitter size={'25px'} />} />
             </div>
           </div>
         </div>
