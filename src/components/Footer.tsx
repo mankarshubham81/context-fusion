@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react';
 // import { FETCH_FOOTER } from '@/sanity/queries/footer/fetch-footer';
 // import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import Image from 'next/image';
+import logoSrc from '../../static/images/context-fusion.svg';
 // import { FETCH_FOOTER } from './../../../sanity/queries/footer/fetch-footer';
 interface SocialIconProps {
   href: string;
@@ -64,7 +66,13 @@ export default function Footer() {
           {/* Section 1: Company Logo and Page Links */}
           <div className="flex flex-col justify-between items-center md:items-center">
             {/* <img src="/logo.png" alt="Company Logo" className="w-20 mb-4" /> */}
-            <h1 className="text-bold mb-4">Company Logo</h1>
+            <Image
+              src={logoSrc}
+              alt="Context Fusion Logo"
+              width={55}
+              height={55}
+              className="rounded-full filter mix-blend-color-dodge invert" // Use dark:invert to switch colors in dark mode
+            />
             <ul className="text-center">
               {footerData?.usefulLinks.map(({ _key, usefulLinkName, usefulLinkPath }) => (
                 <li key={_key} className="mb-2 mt-1">

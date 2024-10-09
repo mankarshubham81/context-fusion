@@ -6,7 +6,9 @@ import Link from './Link';
 import MobileNav from './MobileNav';
 import ThemeSwitch from './ThemeSwitch';
 import AnalyticsLink from './AnalyticsLink';
-
+// import Logo from '../../static/images/context-fusion.svg';
+import Image from 'next/image';
+import logoSrc from '../../static/images/context-fusion.svg';
 
 export const headerNavLinks = [
   {
@@ -39,7 +41,15 @@ const Header = () => {
     <header className="supports-backdrop-blur fixed left-0 right-0 top-0 z-40 bg-gray-200 text-black py-4 backdrop-blur dark:dark:bg-gray-900 dark:text-white border-b-2 shadow-lg border-gray-300 dark:border-none">
       <div className="mx-auto flex max-w-4xl items-center justify-between px-3 xl:max-w-5xl xl:px-0">
         <Link href="/" aria-label="Context Fusion" className="flex items-center">
-          <div className="animate-wave">Logo</div>
+          <div className="animate-wave">
+            <Image
+              src={logoSrc}
+              alt="Context Fusion Logo"
+              width={50}
+              height={50}
+              className="rounded-full filter mix-blend-color-burn dark:mix-blend-color-dodge dark:invert" // Use dark:invert to switch colors in dark mode
+            />
+      </div>
           <div className="group ml-2 text-xl font-bold transition duration-300 text-customBlue">
             Context Fusion
             <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[85%] bg-gray-200  dark:dark:bg-gray-900 dark:text-white"></span>

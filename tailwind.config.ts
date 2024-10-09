@@ -12,7 +12,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        customBlue: '#696dff',
+        customBlue: '#4287f5',
       },
     },
   },
