@@ -52,9 +52,9 @@ const Header = () => {
                 key={link.title}
                 href={link.href}
                 className={clsx(
-                  'mx-1 rounded px-2 py-1 font-medium sm:px-3 sm:py-2',
+                  'mx-1 rounded px-2 py-1 font-medium sm:px-3 sm:py-2 hover:bg-customBlue dark:hover:bg-customBlue ',
                      link.href
-                    ? 'text-black bg-gray-200 dark:bg-primary'
+                    ? 'text-black bg-gray-200 dark:text-gray-100 dark:bg-gray-900'
                     : 'hover:bg-gray-600 dark:hover:bg-primary'
                 )}
               >

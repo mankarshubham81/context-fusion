@@ -66,7 +66,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
             <header className="relative">
               <Image
                 src={imageUrl}
-                className="w-full h-56 object-cover lg:h-64"
+                className="w-full h-52 object-cover lg:h-64"
                 loading="lazy"
                 width={800}
                 height={450}

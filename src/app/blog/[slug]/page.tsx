@@ -44,10 +44,10 @@ const Blog = async ({ params }: BlogProps) => {
       </Head>
       <article className="max-w-3xl mx-auto mt-16 p-4">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-        <div className="flex items-center mb-6">
-          <span className="text-gray-600">By {post.author || 'Unknown Author'}</span>
+        <div className="flex items-center mb-6 text-gray-600 dark:text-gray-300">
+          <span >By {post.author || 'Unknown Author'}</span>
           <span className="mx-2">|</span>
-          <span className="text-gray-600">{new Date(post.publishedAt).toLocaleDateString()}</span>
+          <span >{new Date(post.publishedAt).toUTCString()}</span>
         </div>
         {post.mainImage?.asset?.url && (
           <div className="mb-6">

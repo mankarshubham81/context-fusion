@@ -37,7 +37,7 @@ const CategoryList = ({ categories, onCategoryClick }: CategoryListProps) => {
           <li
             key={i}
             onClick={() => onCategoryClick(category.title)}
-            className="transition-transform duration-300 hover:scale-95 text-gray-900 bg-gray-300 hover:text-customBlue dark:hover:text-customBlue cursor-pointer space-x-2 overflow-x-auto  dark:text-gray-200 dark:bg-gray-700 px-4 py-2 rounded"
+            className="transition-transform duration-200 hover:scale-95 text-gray-900 bg-gray-300 hover:text-customBlue dark:hover:text-customBlue cursor-pointer space-x-2 overflow-x-auto  dark:text-gray-200 dark:bg-gray-700 px-4 py-2 rounded"
           >
             {category.title}
           </li>

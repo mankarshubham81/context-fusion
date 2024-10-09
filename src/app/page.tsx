@@ -112,7 +112,7 @@ const Home = () => {
       <Navbar />
 
       <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-2 md:mx-2 py-4 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-14">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16">
           {/* Categories Section */}
           <aside className="md:col-span-2 sm:col-span-1">
             <CategoryList
