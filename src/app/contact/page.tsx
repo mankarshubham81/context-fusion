@@ -40,7 +40,7 @@ const ContactForm = () => {
               type="text"
               id="name"
               name="name"
-              className="block w-full p-3 border border-gray-300 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+              className="block w-full p-3 border border-gray-200 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
               required
               value={formData.name}
               onChange={handleChange}
@@ -60,7 +60,7 @@ const ContactForm = () => {
               type="email"
               id="email"
               name="email"
-              className="block w-full p-3 border border-gray-300 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+              className="block w-full p-3 border border-gray-200 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
               required
               value={formData.email}
               onChange={handleChange}
@@ -81,7 +81,7 @@ const ContactForm = () => {
             type="text"
             id="subject"
             name="subject"
-            className="block w-full p-3 border border-gray-300 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+            className="block w-full p-3 border border-gray-200 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
             required
             value={formData.subject}
             onChange={handleChange}
@@ -102,7 +102,7 @@ const ContactForm = () => {
             id="message"
             name="message"
             rows={8}
-            className="block w-full p-3 border border-gray-300 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+            className="block w-full p-3 border border-gray-200 rounded-lg text-gray-700 dark:text-gray-200 dark:bg-slate-800 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
             required
             value={formData.message}
             onChange={handleChange}
