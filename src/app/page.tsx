@@ -3,11 +3,11 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
+// import Navbar from '../components/Navbar';
 import CategoryList from '../components/CategoryList';
 import BlogPost from '../components/BlogPost';
 import Pagination from '../components/Pagination';
-import Footer from '../components/Footer';
+// import Footer from '../components/Footer';
 import Head from 'next/head';
 import { client as sanityClient } from '../sanity/lib/client';
 import { BlogPostData, Category } from '../app/types';
@@ -111,7 +111,7 @@ const Home = () => {
         <meta name="author" content="John Doe" />
       </Head>
 
-      <Navbar />
+      {/* <Navbar /> */}
 
       <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-2 md:mx-2 py-4 px-4">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16">
@@ -177,7 +177,7 @@ const Home = () => {
         </div>
       </main>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
