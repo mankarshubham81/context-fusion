@@ -16,11 +16,11 @@ export const headerNavLinks = [
     href: '/',
     description: 'Go back to the homepage',
   },
-  {
-    title: 'Blog',
-    href: '/blog',
-    description: 'Explore latest posts, articles, and insights',
-  },
+  // {
+  //   title: 'Blog',
+  //   href: '/blog',
+  //   description: 'Explore latest posts, articles, and insights',
+  // },
   {
     title: 'About',
     href: '/about',

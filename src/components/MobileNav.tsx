@@ -8,21 +8,21 @@ export const headerNavLinks = [
       href: '/',
       description: 'Go back to the homepage',
     },
-    {
-      title: 'Blog',
-      href: '/blog',
-      description: 'Explore latest posts, articles, and insights',
-    },
-    {
-      title: 'Categories',
-      href: '/categories',
-      description: 'Browse posts by categories for easy navigation',
-    },
-    {
-      title: 'Authors',
-      href: '/authors',
-      description: 'Meet the authors who contribute to the blog',
-    },
+    // {
+    //   title: 'Blog',
+    //   href: '/blog',
+    //   description: 'Explore latest posts, articles, and insights',
+    // },
+    // {
+    //   title: 'Categories',
+    //   href: '/categories',
+    //   description: 'Browse posts by categories for easy navigation',
+    // },
+    // {
+    //   title: 'Authors',
+    //   href: '/authors',
+    //   description: 'Meet the authors who contribute to the blog',
+    // },
     {
       title: 'About',
       href: '/about',
@@ -33,12 +33,12 @@ export const headerNavLinks = [
       href: '/contact',
       description: 'Get in touch for queries or collaborations',
     },
-    {
-      title: 'Dark Mode',
-      href: '#',
-      action: 'toggleDarkMode',
-      description: 'Switch between dark and light themes',
-    },
+    // {
+    //   title: 'Dark Mode',
+    //   href: '#',
+    //   action: 'toggleDarkMode',
+    //   description: 'Switch between dark and light themes',
+    // },
   ];
 
 import Link from './Link';
