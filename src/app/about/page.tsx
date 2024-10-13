@@ -5,6 +5,7 @@ import Image from "next/image";
 import { client as sanityClient } from '../../sanity/lib/client';
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 // import PortableText from './../../components/PortableText';
+import { PortableTextBlock as PTBlock, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
 
 
 interface Author {
@@ -16,8 +17,12 @@ interface Author {
     };
     alt?: string;
   };
-  bio: any[];
+  bio: PortableTextBlock[];
   socialLinks: { platform: string; url: string }[];
+}
+
+export interface PortableTextBlock extends PTBlock {
+  children: (ArbitraryTypedObject | PortableTextSpan)[];
 }
 
 interface SocialIconProps {
@@ -79,13 +84,11 @@ const About = () => {
               />
             </div>
           </div>
-
-
           {/* Text Section */}
           <div className="w-full md:w-1/2 mt-8 md:mt-0 md:pl-12">
           {/* <PortableText content={author.bio} /> */}
             <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
-              Hello, I'm {author.name}
+              {`Hello, I'm ${author.name}`}
             </h2>
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
               {/* {/* Render Portable Text  */}
