@@ -71,6 +71,7 @@ export default function Footer() {
               alt="Context Fusion Logo"
               width={55}
               height={55}
+              loading="lazy"
               className="rounded-full filter mix-blend-color-dodge invert" // Use dark:invert to switch colors in dark mode
             />
             <ul className="text-center">

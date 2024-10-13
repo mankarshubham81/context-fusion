@@ -45,6 +45,7 @@ const Header = () => {
             <Image
               src={logoSrc}
               alt="Context Fusion Logo"
+              priority
               width={50}
               height={50}
               className="rounded-full filter mix-blend-color-burn dark:mix-blend-color-dodge dark:invert" // Use dark:invert to switch colors in dark mode
