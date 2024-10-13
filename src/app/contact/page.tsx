@@ -19,7 +19,7 @@ const ContactForm = () => {
   return (
     <div className="mt-12 flex items-center justify-center bg-gray-200 dark:bg-slate-900 py-8">
       <form
-        action="https://formspree.io/f/mnqeeqay"
+        action={`https://formspree.io/f/${process.env.FORMS_PREE_KEY}`}
         method="POST"
         className="w-full max-w-2xl bg-gray-200 dark:bg-gray-800 shadow-2xl rounded-lg p-6"
       >
