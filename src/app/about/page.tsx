@@ -4,7 +4,7 @@ import Image from "next/image";
 // import client from "@/lib/sanity.client"; // Import your Sanity client
 import { client as sanityClient } from '../../sanity/lib/client';
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import PortableText from './../../components/PortableText';
+// import PortableText from './../../components/PortableText';
 
 
 interface Author {
