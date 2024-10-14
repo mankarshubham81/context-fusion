@@ -30,12 +30,12 @@ const ContactForm = () => {
         {/* Name and Email Row */}
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
+            {/* <label
               className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
               htmlFor="name"
             >
               Your Name
-            </label>
+            </label> */}
             <input
               type="text"
               id="name"
@@ -50,12 +50,12 @@ const ContactForm = () => {
           </div>
 
           <div className="w-full md:w-1/2 px-3">
-            <label
+            {/* <label
               className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
               htmlFor="email"
             >
               Your Email
-            </label>
+            </label> */}
             <input
               type="email"
               id="email"
@@ -71,12 +71,12 @@ const ContactForm = () => {
 
         {/* Subject */}
         <div className="mb-6">
-          <label
+          {/* <label
             className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
             htmlFor="subject"
           >
             Subject
-          </label>
+          </label> */}
           <input
             type="text"
             id="subject"
@@ -92,12 +92,12 @@ const ContactForm = () => {
 
         {/* Message */}
         <div className="mb-6">
-          <label
+          {/* <label
             className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
             htmlFor="message"
           >
             Message
-          </label>
+          </label> */}
           <textarea
             id="message"
             name="message"
