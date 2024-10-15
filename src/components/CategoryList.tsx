@@ -18,7 +18,7 @@ const CategoryList = ({ categories, onCategoryClick }: CategoryListProps) => {
           <div className="flex space-x-2 overflow-x-auto scrollbar-hide px-2">
             {categories.map((category) => (
             <button
-                key={category.slug}
+                key={category.title}
               onClick={() => onCategoryClick(category.title)}
                 className="flex-shrink-0 transition-transform duration-300 hover:scale-95 font-semibold bg-gray-300 text-gray-900 dark:bg-gray-700 dark:text-gray-200 hover:text-customBlue px-4 py-2 rounded cursor-pointer"
             >

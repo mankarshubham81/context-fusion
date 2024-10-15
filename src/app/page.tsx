@@ -43,7 +43,7 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState<BlogPostData[]>([]);
   const [allCategories, setAllCategories] = useState<Category[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const postsPerPage = 6; // Number of posts per page
+  const postsPerPage = 4; // Number of posts per page
 
   // Fetch posts and categories from Sanity
   useEffect(() => {
