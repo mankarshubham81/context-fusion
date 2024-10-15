@@ -58,9 +58,9 @@ const Blog = async ({ params }: BlogProps) => {
               height={600}
               className="rounded"
               loading="lazy"
-              // onError={(e) => {
-              //   e.currentTarget.src = '/fallback-image.jpg';
-              // }}
+              onError={(e) => {
+              e.currentTarget.src = '/fallback-image.jpg';
+             }}
             />
           </div>
         )} */}
