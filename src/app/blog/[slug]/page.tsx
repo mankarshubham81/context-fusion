@@ -3,7 +3,7 @@ import { client as sanityClient } from '../../../sanity/lib/client';
 import { BlogPost } from '../../types';
 import React from 'react';
 import PortableText from '../../../components/PortableText';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Head from 'next/head';
 
 interface BlogProps {
