@@ -31,7 +31,7 @@ const query = `*[_type == "post"]{
   readingTime
 }`;
 
-const categoriesQuery = `*[_type == "category"]{
+const categoriesQuery = `*[_type == "category"] | order(title asc) {
   title,
   slug
 }`;
