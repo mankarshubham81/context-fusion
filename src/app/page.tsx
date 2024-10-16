@@ -1,4 +1,4 @@
-// pages/index.tsx or app/page.tsx (depending on your Next.js setup)
+// pages/index.tsx or app/page.tsx
 
 "use client";
 
@@ -11,8 +11,7 @@ import Pagination from '../components/Pagination';
 import Head from 'next/head';
 import { client as sanityClient } from '../sanity/lib/client';
 import { BlogPostData, Category } from '../app/types';
-import { FaSearch} from 'react-icons/fa';
-
+import { FaSearch } from 'react-icons/fa';
 
 const query = `*[_type == "post"]{
   title,
@@ -120,6 +119,7 @@ const Home = () => {
             <CategoryList
               categories={allCategories}
               onCategoryClick={handleCategoryClick}
+              selectedCategory={selectedCategory}
             />
           </aside>
 
