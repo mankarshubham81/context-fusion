@@ -47,7 +47,7 @@ const Blog = async ({ params }: BlogProps) => {
         <div className="flex items-center mb-6 text-gray-600 dark:text-gray-300">
           <span >By {post.author || 'Unknown Author'}</span>
           <span className="mx-2">|</span>
-          <span >{new Date(post.publishedAt).toUTCString()}</span>
+          <span >{post.publishedAt}</span>
         </div>
         {post.mainImage?.asset?.url && (
           <div className="mb-6">

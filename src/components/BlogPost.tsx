@@ -78,7 +78,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
                 {title}
               </h1>
               <div className="flex items-center text-sm text-gray-500 mb-2">
-                <time dateTime={new Date(date).toISOString()} itemProp="datePublished">
+                <time dateTime={date} itemProp="datePublished">
                   {date}
                 </time>
                 <span className="mx-2">•</span>

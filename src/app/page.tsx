@@ -152,7 +152,7 @@ const Home = () => {
                       title={post.title}
                       excerpt={post.excerpt}
                       category={post.categories.map((cat) => cat.title).join(', ')}
-                      date={new Date(post.publishedAt).toLocaleDateString()}
+                      date={post.publishedAt}
                       author={post.authorName}
                       imageUrl={post.mainImage.asset.url}
                     />
