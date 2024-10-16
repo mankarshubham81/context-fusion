@@ -3,7 +3,7 @@ import { client as sanityClient } from '../../../sanity/lib/client';
 import { BlogPost } from '../../types';
 import React from 'react';
 import PortableText from '../../../components/PortableText';
-// import Image from 'next/image';
+import Image from 'next/image';
 import Head from 'next/head';
 
 interface BlogProps {
@@ -49,21 +49,21 @@ const Blog = async ({ params }: BlogProps) => {
           <span className="mx-2">|</span>
           <span >{new Date(post.publishedAt).toUTCString()}</span>
         </div>
-        {/* {post.mainImage?.asset?.url && (
+        {post.mainImage?.asset?.url && (
           <div className="mb-6">
             <Image
-              src={post.mainImage.asset.url}
+              src={post?.mainImage?.asset.url}
               alt={post.mainImage.alt || 'Main Image'}
               width={800}
               height={600}
               className="rounded"
               loading="lazy"
-              onError={(e) => {
-              e.currentTarget.src = '/fallback-image.jpg';
-             }}
+              // onError={(e) => {
+              //   e.currentTarget.src = '/fallback-image.jpg';
+              // }}
             />
           </div>
-        )} */}
+        )}
         <PortableText content={post.body} />
       </article>
     </>

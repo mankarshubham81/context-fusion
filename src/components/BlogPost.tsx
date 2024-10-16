@@ -45,15 +45,15 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
               datePublished: date,
               publisher: {
                 '@type': 'Organization',
-                name: 'Your Blog Name',
+                name: 'Context Fusion',
                 logo: {
                   '@type': 'ImageObject',
-                  url: 'https://yourwebsite.com/logo.jpg', // Add your website logo URL
+                  url: 'https://context-fusion.vercel.app/logo.jpg', // Add your website logo URL
                 },
               },
               mainEntityOfPage: {
                 '@type': 'WebPage',
-                '@id': `https://yourwebsite.com/blog/${slug}`,
+                '@id': `https://context-fusion.vercel.app/blog/${slug}`,
               },
             }),
           }}
