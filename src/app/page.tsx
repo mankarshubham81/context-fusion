@@ -12,6 +12,7 @@ import Head from 'next/head';
 import { client as sanityClient } from '../sanity/lib/client';
 import { BlogPostData, Category } from '../app/types';
 import { FaSearch } from 'react-icons/fa';
+import About from './about/page';
 
 const query = `*[_type == "post"]{
   title,
@@ -98,7 +99,7 @@ const Home = () => {
   return (
     <div className="bg-gray-200 dark:bg-gray-950 min-h-screen">
       <Head>
-        <title>My Blog | Best SEO Practices</title>
+        <title>Context Fusion |My Blog | Best SEO Practices</title>
         <meta
           name="description"
           content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business."
@@ -107,13 +108,15 @@ const Home = () => {
           name="keywords"
           content="Next.js, blog, SEO, lifestyle, business"
         />
-        <meta name="author" content="John Doe" />
+        <meta name="author" content="Shubham Mankar" />
       </Head>
 
       {/* <Navbar /> */}
 
       <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-2 md:mx-2 py-4 px-4">
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16">
+        <About/>
+        {/* <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16"> */}
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-4">
           {/* Categories Section */}
           <aside className="md:col-span-2 sm:col-span-1">
             <CategoryList

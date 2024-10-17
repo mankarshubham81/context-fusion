@@ -19,7 +19,7 @@ interface PaginationProps {
           bg-black
           transition-all
           rounded-md
-          border-customBlue hover:text-white 
+          border-customBlue hover:text-white hover:bg-customBlue
           transition-colors duration-200 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-gray-500 ${previousPage ? 'text-customBlue' : 'text-gray-400 cursor-not-allowed'}`}
         >
@@ -35,7 +35,7 @@ interface PaginationProps {
           bg-black
           transition-all
           rounded-md
-          border-customBlue hover:text-white 
+          border-customBlue hover:text-white hover:bg-customBlue
           transition-colors duration-200 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-gray-500 ${nextPage ? 'text-customBlue' : 'text-gray-400 cursor-not-allowed'}`}
         >

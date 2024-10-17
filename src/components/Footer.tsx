@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 // import { FETCH_FOOTERResult } from '@/types/generated/sanity.types';
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
-import logoSrc from '../../static/images/context-fusion.svg';
+import logoSrc from '../../static/images/context_fusion.png';
 // import { FETCH_FOOTER } from './../../../sanity/queries/footer/fetch-footer';
 interface SocialIconProps {
   href: string;
@@ -72,7 +72,7 @@ export default function Footer() {
               width={55}
               height={55}
               loading="lazy"
-              className="rounded-full filter mix-blend-color-dodge invert" // Use dark:invert to switch colors in dark mode
+              className="rounded-full filter border-2 border-customBlue" // Use dark:invert to switch colors in dark mode
             />
             <ul className="text-center">
               {footerData?.usefulLinks.map(({ _key, usefulLinkName, usefulLinkPath }) => (
@@ -95,7 +95,7 @@ export default function Footer() {
 
           {/* Section 3: Social Media Icons */}
           <div className="flex flex-col items-center md:items-center">
-            <h3 className="text-xl font-semibold mb-4">Follow Us</h3>
+            <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
             <div className="flex space-x-6">
               <SocialIcon href="https://github.com/mankarshubham81/mankarshubham81" icon={<FaGithub size={'25px'} />} />
               <SocialIcon href="https://in.linkedin.com/in/mankarshubham81" icon={<FaLinkedin size={'25px'} />} />

@@ -8,7 +8,7 @@ import ThemeSwitch from './ThemeSwitch';
 import AnalyticsLink from './AnalyticsLink';
 // import Logo from '../../static/images/context-fusion.svg';
 import Image from 'next/image';
-import logoSrc from '../../static/images/context-fusion.svg';
+import logoSrc from '../../static/images/context_fusion.png';
 
 export const headerNavLinks = [
   {
@@ -48,10 +48,10 @@ const Header = () => {
               priority
               width={50}
               height={50}
-              className="rounded-full filter mix-blend-color-burn dark:mix-blend-color-dodge dark:invert" // Use dark:invert to switch colors in dark mode
+              className="rounded-full border-2 border-customBlue hover:[filter:drop-shadow(0_0_2em_#7C3AED)]" // Use dark:invert to switch colors in dark mode
             />
       </div>
-          <div className="group ml-2 text-xl font-bold transition duration-300 text-customBlue">
+          <div className="group ml-4 text-xl font-bold transition duration-300 text-customBlue">
             Context Fusion
             <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[85%] bg-gray-200  dark:dark:bg-gray-900 dark:text-white"></span>
           </div>
