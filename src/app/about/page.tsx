@@ -4,8 +4,8 @@ import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../../sanity/lib/client";
 import logoSrc from "../../../static/images/context_fusion.png";
-// import { PortableTextBlock as PTBlock, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
-
+import { PortableTextBlock as PTBlock, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
+import PortableText from './../../components/PortableText';
 
 interface Author {
   name: string;
@@ -16,14 +16,14 @@ interface Author {
     };
     alt?: string;
   };
-  bio: { children: { text: string }[] }[];
-  // bio: PortableTextBlock[];
+  // bio: { children: { text: string }[] }[];
+  bio: PortableTextBlock[];
   socialLinks: { platform: string; url: string }[];
 }
 
-// export interface PortableTextBlock extends PTBlock {
-//   children: (ArbitraryTypedObject | PortableTextSpan)[];
-// }
+export interface PortableTextBlock extends PTBlock {
+  children: (ArbitraryTypedObject | PortableTextSpan)[];
+}
 
 // interface SocialIconProps {
 //   href: string;
@@ -39,7 +39,7 @@ const About = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(200);
-  const typewriterWords = ["Software Engineer", "Full Stack Developer", "Web Developer", "Photographer", "skater", "Blogger"];
+  const typewriterWords = ["Software Engineer", "Full Stack Dev", "Web Developer", "Photographer", "skater", "Blogger"];
 
   useEffect(() => {
     const fetchAuthor = async () => {
@@ -99,17 +99,30 @@ const About = () => {
 
   const images = [author.image.asset.url, logoSrc];
 
+  console.log("data", author)
   return (
-    <section className="min-h-screen mt-10 sm:mx-16 py-16 bg-gray-100 dark:bg-slate-900">
-      <div className="container mx-auto px-4">
-        <h1 className="text-center text-4xl font-bold text-gray-800 dark:text-white mb-8">
+    <section className="min-h-screen mt-12  sm:mx-4 py-8 bg-gray-100 dark:bg-slate-900">
+      <div className="w-full px-4">
+        {/* <h1 className="text-center text-4xl font-bold text-gray-800 dark:text-white mb-8">
           Context Fusion
-        </h1>
+        </h1> */}
+        <h2 className="text-center text-3xl font-semibold" >
+          {`My Name Is ${author.name}`}{" "}
+        </h2>
+        <h2 className="text-center text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          <p
+            className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block"
+          >
+            {`I'm ${text}`}
+          </p>
+          <span className="blinking-cursor text-customBlue font-bold">|</span>
+        </h2>
 
-        <div className="flex flex-col md:flex-row items-center justify-between sm:mx-4">
+
+        <div className="flex w-full flex-col md:flex-row items-center justify-between sm:mx-4">
           {/* Image Section */}
-          <div className="w-full md:w-1/2">
-            <div className="relative w-80 h-80 mx-auto md:mx-0 md:w-full md:h-96">
+          <div className=" gap-1 shrink-0 ">
+            <div className=" relative w-80 h-80 mx-1 ">
               {images.map((image, index) => (
                 <Image
                   key={index}
@@ -127,22 +140,23 @@ const About = () => {
           </div>
 
           {/* Text Section */}
-          <div className="w-full md:w-1/2 mt-8 md:mt-0 md:pl-12">
-            <h2 className="text-2xl font-semibold" >
+          <div className="mt-8 w-full sm:px-8 md:mt-0 md:pl-12">
+            {/* <h2 className="text-2xl font-semibold" >
               {`My Name Is ${author.name}`}{" "}
-            </h2>
-            <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
+            </h2> */}
+            {/* <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
               <p
                 className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block"
               >
                 {`I'm ${text}`}
               </p>
               <span className="blinking-cursor text-customBlue font-bold">|</span>
-            </h2>
-            <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-              {author.bio.map((block, index) => (
+            </h2> */}
+            <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+            <PortableText content={author.bio} />
+              {/* {author.bio.map((block, index) => (
                 <p key={index}>{block.children[0].text}</p>
-              ))}
+              ))} */}
             </div>
 
             {/* Social Media Icons */}
@@ -151,19 +165,19 @@ const About = () => {
                 <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
                 <div className="flex space-x-6">
                   <SocialIcon
-                    href={`${author.socialLinks[0]}`}
+                    href={`${author.socialLinks[0].url}`}
                     icon={<FaGithub size={"25px"} />}
                   />
                   <SocialIcon
-                    href={`${author.socialLinks[1]}`}
+                    href={`${author.socialLinks[1].url}`}
                     icon={<FaLinkedin size={"25px"} />}
                   />
                   <SocialIcon
-                    href={`${author.socialLinks[2]}`}
+                    href={`${author.socialLinks[2].url}`}
                     icon={<FaInstagram size={"25px"} />}
                   />
                   <SocialIcon
-                    href={`${author.socialLinks[3]}`}
+                    href={`${author.socialLinks[3].url}`}
                     icon={<FaTwitter size={"25px"} />}
                   />
                 </div>

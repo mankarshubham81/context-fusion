@@ -97,8 +97,8 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-center">
             <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
             <div className="flex space-x-6">
-              <SocialIcon href="https://github.com/mankarshubham81/mankarshubham81" icon={<FaGithub size={'25px'} />} />
-              <SocialIcon href="https://in.linkedin.com/in/mankarshubham81" icon={<FaLinkedin size={'25px'} />} />
+              <SocialIcon href="https://github.com/mankarshubham81" icon={<FaGithub size={'25px'} />} />
+              <SocialIcon href="https://linkedin.com/in/mankarshubham81" icon={<FaLinkedin size={'25px'} />} />
               <SocialIcon href="https://www.instagram.com/mankarshubham81/" icon={<FaInstagram size={'25px'} />} />
               <SocialIcon href="https://twitter.com/mankarshubham81" icon={<FaTwitter size={'25px'} />} />
             </div>

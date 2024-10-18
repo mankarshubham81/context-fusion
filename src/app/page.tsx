@@ -113,7 +113,7 @@ const Home = () => {
 
       {/* <Navbar /> */}
 
-      <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-2 md:mx-2 py-4 px-4">
+      <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-1 md:mx-1 py-2 px-2 sm:p-4">
         <About/>
         {/* <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16"> */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-4">
