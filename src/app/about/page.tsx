@@ -99,7 +99,6 @@ const About = () => {
 
   const images = [author.image.asset.url, logoSrc];
 
-  console.log("data", author)
   return (
     <section className="min-h-screen mt-12  sm:mx-4 py-8 bg-gray-100 dark:bg-slate-900">
       <div className="w-full px-4">
