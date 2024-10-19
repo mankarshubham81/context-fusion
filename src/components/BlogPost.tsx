@@ -62,7 +62,6 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
 
       {/* Blog Post Layout */}
       <article className="relative h-full rounded-lg bg-white dark:bg-gray-900 dark:text-gray-100 overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out">
-        <Link href={`/blog/${slug}`} className="block">
             <header className="relative">
               <Image
                 src={imageUrl}
@@ -88,15 +87,29 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
                 {excerpt}
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-customBlue text-sm font-semibold">
+                <span className="text-white bg-yellow-900 rounded-full p-1.5 text-sm font-semibold">
                   {category}
                 </span>
-                <button className="text-customBlue text-sm font-semibold underline">
-                  Read More
-                </button>
+                <Link href={`/blog/${slug}`} className="block">
+                  <button
+                    className={`px-4 py-2 sm:my-2 mx-4 
+                    text-white 
+                    border-2
+                    dark:bg-black
+                    bg-customBlue
+                    transition-all
+                    rounded-md
+                    border-customBlue hover:text-white hover:bg-black dark:hover:bg-customBlue
+                    duration-200 ease-in-out
+                    focus:outline-none focus:ring-2 focus:ring-gray-500`}
+                  >
+                    Read More...
+                  </button>
+                </Link>
+                {/* <button className="text-customBlue text-sm font-semibold underline">
+                </button> */}
               </div>
             </div>
-        </Link>
       </article>
     </>
   );

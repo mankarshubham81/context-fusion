@@ -15,7 +15,7 @@ interface PaginationProps {
           disabled={!previousPage}
           className={`px-4 py-2 sm:my-2 mx-4 
           text-white 
-          border 
+          border-2
           bg-black
           transition-all
           rounded-md
@@ -31,7 +31,7 @@ interface PaginationProps {
           disabled={!nextPage}
           className={`px-4 py-2 sm:my-2 mx-4 
           text-white 
-          border 
+          border-2
           bg-black
           transition-all
           rounded-md
