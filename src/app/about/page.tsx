@@ -39,7 +39,7 @@ const About = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(200);
-  const typewriterWords = ["Software Engineer", "Full Stack Dev", "Web Developer", "Photographer", "skater", "Blogger"];
+  const typewriterWords = ["Software Engineer", "Full Stack Developer", "Footballer", "karateka","Web Developer", "Photographer", "skater", "shuttler", "Blogger", "Writer", "Vadak"];
 
   useEffect(() => {
     const fetchAuthor = async () => {
@@ -108,7 +108,7 @@ const About = () => {
         <h2 className="text-center text-3xl font-semibold" >
           {`My Name Is ${author.name}`}{" "}
         </h2>
-        <h2 className="text-center text-3xl font-bold text-gray-800 dark:text-white mb-4">
+        <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-white mb-4">
           <p
             className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block"
           >
