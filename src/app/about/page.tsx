@@ -100,7 +100,7 @@ const About = () => {
   const images = [author.image.asset.url, logoSrc];
 
   return (
-    <section className="min-h-screen mt-12  sm:mx-4 py-8 bg-gray-100 dark:bg-slate-900">
+    <section className="min-h-screen mt-12  sm:mx-4 py-8 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
       <div className="w-full px-4">
         {/* <h1 className="text-center text-4xl font-bold text-gray-800 dark:text-white mb-8">
           Context Fusion
