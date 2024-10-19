@@ -87,7 +87,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
                 {excerpt}
               </p>
               <div className="flex justify-between items-center">
-                <span className="text-white bg-yellow-900 rounded-full p-1.5 text-sm font-semibold">
+                <span className="text-white bg-purple-900 rounded-full px-2.5 py-2  text-sm font-semibold">
                   {category}
                 </span>
                 <Link href={`/blog/${slug}`} className="block">

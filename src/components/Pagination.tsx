@@ -16,11 +16,12 @@ interface PaginationProps {
           className={`px-4 py-2 sm:my-2 mx-4 
           text-white 
           border-2
-          bg-black
+        dark:bg-black
+        bg-customBlue
           transition-all
           rounded-md
-          border-customBlue hover:text-white hover:bg-customBlue
-          transition-colors duration-200 ease-in-out
+          border-customBlue hover:text-white hover:bg-black dark:hover:bg-customBlue
+          duration-200 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-gray-500 ${previousPage ? 'text-customBlue' : 'text-gray-400 cursor-not-allowed'}`}
         >
           Previous
@@ -32,11 +33,12 @@ interface PaginationProps {
           className={`px-4 py-2 sm:my-2 mx-4 
           text-white 
           border-2
-          bg-black
+        dark:bg-black
+        bg-customBlue
           transition-all
           rounded-md
-          border-customBlue hover:text-white hover:bg-customBlue
-          transition-colors duration-200 ease-in-out
+          border-customBlue hover:text-white hover:bg-black dark:hover:bg-customBlue
+          duration-200 ease-in-out
           focus:outline-none focus:ring-2 focus:ring-gray-500 ${nextPage ? 'text-customBlue' : 'text-gray-400 cursor-not-allowed'}`}
         >
           Next

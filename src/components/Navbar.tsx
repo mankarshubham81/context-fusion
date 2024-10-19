@@ -46,14 +46,14 @@ const Header = () => {
               src={logoSrc}
               alt="Context Fusion Logo"
               priority
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               className="rounded-full border-2 border-customBlue hover:[filter:drop-shadow(0_0_2em_#7C3AED)]" // Use dark:invert to switch colors in dark mode
             />
-      </div>
+          </div>
           <div className="group ml-4 text-xl font-bold transition duration-300 text-customBlue">
             Context Fusion
-            <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[85%] bg-gray-200  dark:dark:bg-gray-900 dark:text-white"></span>
+            <span className="block h-0.5 max-w-0 bg-black6fg g transition-all duration-500 group-hover:max-w-[100%] bg-customBlue   dark:text-customBlue"></span>
           </div>
         </Link>
         <div className="flex items-center text-base leading-5">
