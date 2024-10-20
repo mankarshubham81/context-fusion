@@ -30,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>{"Context Fusion"}</title>
+        <script defer src="https://cloud.umami.is/script.js" data-website-id="5aaf48b2-433e-4c94-8711-d3c4a96dd240"></script>
       </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
