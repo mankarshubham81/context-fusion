@@ -17,7 +17,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Context Fusion",
+  title: "- Perception on Context",
   description: "Crafted by Context Fusion",
 };
 
