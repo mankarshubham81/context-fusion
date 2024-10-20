@@ -137,7 +137,7 @@ const Home = () => {
                   placeholder={`Search blog posts...`}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 w-full p-3 bg-white placeholder-black dark:placeholder-white dark:bg-gray-800 rounded-md shadow-xl focus:outline-none dark:text-gray-200 text-black focus:ring-2 focus:ring-gray-500 dark:focus:ring-customBlue"
+                  className="pl-10 w-full p-3 bg-white placeholder-black dark:placeholder-white dark:bg-gray-800 rounded-md shadow-xl focus:outline-none dark:text-gray-200 text-black focus:ring-2 focus:ring-customBlue"
                 />
               </div>
             </div>
