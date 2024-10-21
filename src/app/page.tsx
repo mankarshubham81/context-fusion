@@ -1,20 +1,14 @@
-// pages/index.tsx or app/page.tsx
-
 "use client";
-
-import { useState, useEffect } from 'react';
-// import Navbar from '../components/Navbar';
-import CategoryList from '../components/CategoryList';
-import BlogPost from '../components/BlogPost';
-import Pagination from '../components/Pagination';
-// import Footer from '../components/Footer';
-import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { client as sanityClient } from '../sanity/lib/client';
 import { BlogPostData, Category } from '../app/types';
 import { FaSearch } from 'react-icons/fa';
+import BlogPost from '../components/BlogPost';
+import CategoryList from '../components/CategoryList';
+import Pagination from '../components/Pagination';
 import About from './about/page';
 
-const query = `*[_type == "post"]{
+const postsQuery = `*[_type == "post"]{
   title,
   slug,
   "authorName": author->name,
@@ -49,10 +43,8 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: BlogPostData[] = await sanityClient.fetch(query);
+        const data: BlogPostData[] = await sanityClient.fetch(postsQuery);
         const allCategoriesData: Category[] = await sanityClient.fetch(categoriesQuery);
-        // console.log('Fetched posts:', data);
-        // console.log('Fetched categories:', allCategoriesData);
         setAllPosts(data);
         setAllCategories(allCategoriesData);
         setFilteredPosts(data); // Initial load shows all posts
@@ -98,26 +90,11 @@ const Home = () => {
 
   return (
     <div className="bg-gray-200 dark:bg-gray-950 min-h-screen">
-      <Head>
-        <title>Context Fusion |My Blog | Best SEO Practices</title>
-        <meta
-          name="description"
-          content="A modern blog built with Next.js, covering topics such as technology, lifestyle, and business."
-        />
-        <meta
-          name="keywords"
-          content="Next.js, blog, SEO, lifestyle, business"
-        />
-        <meta name="author" content="Shubham Mankar" />
-      </Head>
-
-      {/* <Navbar /> */}
-
       <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-1 md:mx-1 py-2 px-2 sm:p-4">
-        <About/>
+        <About />
+
         {/* <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16"> */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-4">
-          {/* Categories Section */}
           <aside className="md:col-span-2 sm:col-span-1">
             <CategoryList
               categories={allCategories}
@@ -126,9 +103,7 @@ const Home = () => {
             />
           </aside>
 
-          {/* Blog Posts Section */}
           <section className="md:col-span-4">
-            {/* Search Bar */}
             <div className="relative">
               <div className="mb-4 flex items-center">
                 <FaSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 dark:text-gray-300" />
@@ -142,12 +117,11 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Blog Post Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
               {currentPosts.length > 0 ? (
                 currentPosts.map((post) => (
                   <div
-                    key={post.slug.current} // Use slug as key for uniqueness
+                    key={post.slug.current}
                     className="transition-transform duration-300 rounded-md shadow-lg hover:scale-105"
                   >
                     <BlogPost
@@ -166,7 +140,6 @@ const Home = () => {
               )}
             </div>
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center">
                 <Pagination
@@ -179,8 +152,6 @@ const Home = () => {
           </section>
         </div>
       </main>
-
-      {/* <Footer /> */}
     </div>
   );
 };
