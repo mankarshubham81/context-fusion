@@ -1,19 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../../sanity/lib/client";
 import logoSrc from "../../../static/images/context_fusion.png";
-import { PortableTextBlock as PTBlock, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
 import PortableText from './../../components/PortableText';
 import { authorQuery } from "@/sanity/lib/queries";
 import { Author } from "../types";
-
-
-// interface SocialIconProps {
-//   href: string;
-//   icon: JSX.Element;
-// }
 
 const About = () => {
   const [author, setAuthor] = useState<Author | null>(null);
@@ -24,7 +17,24 @@ const About = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(200);
-  const typewriterWords = ["Software Engineer", "Full Stack Developer", "Footballer", "karateka","Web Developer", "Photographer", "skater", "shuttler", "Blogger", "Writer", "Vadak"];
+
+  // Memoized typewriter words array
+  const typewriterWords = useMemo(
+    () => [
+      "Software Engineer",
+      "Full Stack Developer",
+      "Footballer",
+      "Karateka",
+      "Web Developer",
+      "Photographer",
+      "Skater",
+      "Shuttler",
+      "Blogger",
+      "Writer",
+      "Vadak",
+    ],
+    []
+  );
 
   useEffect(() => {
     const fetchAuthor = async () => {
@@ -57,14 +67,14 @@ const About = () => {
         setTimeout(() => setIsDeleting(true), 1000); // Delay before deleting
       } else if (isDeleting && text === "") {
         setIsDeleting(false);
-        setLoopNum(loopNum + 1);
+        setLoopNum((prevLoopNum) => prevLoopNum + 1); // Functional update
       }
     };
 
     const typingTimeout = setTimeout(handleTyping, typingSpeed);
 
     return () => clearTimeout(typingTimeout);
-  }, [text, isDeleting, typingSpeed]);
+  }, [text, isDeleting, typingSpeed, loopNum, typewriterWords]);
 
   if (!author) return <p>Loading...</p>;
 
@@ -73,23 +83,20 @@ const About = () => {
   return (
     <section className="min-h-screen mt-12 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
       <div className="w-full px-4">
-        <h2 className="text-center text-3xl font-semibold" >
+        <h2 className="text-center text-3xl font-semibold">
           {`My Name Is ${author.name}`}{" "}
         </h2>
         <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-white mb-4">
-          <p
-            className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block"
-          >
+          <p className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block">
             {`I'm ${text}`}
           </p>
           <span className="blinking-cursor text-customBlue font-bold">|</span>
         </h2>
 
-
         <div className="flex w-full flex-col md:flex-row items-center justify-between sm:mx-4">
           {/* Image Section */}
-          <div className=" gap-1 shrink-0 ">
-            <div className=" relative w-80 h-80 mx-1 ">
+          <div className="gap-1 shrink-0">
+            <div className="relative w-80 h-80 mx-1">
               {images.map((image, index) => (
                 <Image
                   key={index}
@@ -108,7 +115,7 @@ const About = () => {
 
           <div className="mt-8 w-full sm:px-8 md:mt-0 md:pl-12">
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
-            <PortableText content={author.bio} />
+              <PortableText content={author.bio} />
             </div>
 
             <div className="mt-4">
@@ -142,7 +149,12 @@ const About = () => {
 };
 
 const SocialIcon = ({ href, icon }: { href: string; icon: JSX.Element }) => (
-  <a href={href} className="hover:text-blue-500" target="_blank" rel="noopener noreferrer">
+  <a
+    href={href}
+    className="hover:text-blue-500"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
     {icon}
   </a>
 );
