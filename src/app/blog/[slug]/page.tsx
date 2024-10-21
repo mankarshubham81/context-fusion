@@ -5,6 +5,7 @@ import React from 'react';
 import PortableText from '../../../components/PortableText';
 import Image from 'next/image';
 import Head from 'next/head';
+import { blogQuery } from '@/sanity/lib/queries';
 
 interface BlogProps {
   params: { slug: string };
@@ -12,21 +13,7 @@ interface BlogProps {
 
 const Blog = async ({ params }: BlogProps) => {
   const { slug } = params;
-    const query = `*[_type == "post" && slug.current == $slug][0]{
-      title,
-      "slug": slug.current,
-      "author": author->name,
-      mainImage{
-        asset->{url},
-        alt
-      },
-      categories[]->{
-        title
-      },
-      publishedAt,
-      body,  
-      excerpt
-    }`;
+    
 
   // Helper function to format date for SEO and user readability
   // Note: name seprate function for it for use this function for multiple cases 
@@ -48,7 +35,7 @@ const Blog = async ({ params }: BlogProps) => {
     return new Intl.DateTimeFormat('en-IN', options).format(new Date(dateString));
   };
 
-  const post: BlogPost = await sanityClient.fetch(query, { slug });
+  const post: BlogPost = await sanityClient.fetch(blogQuery, { slug });
   // console.log("ppp",post)
 
   if (!post) {
@@ -94,8 +81,8 @@ export default Blog;
 
 // Generate static params for all blog slugs
 export async function generateStaticParams() {
-  const query = `*[_type == "blog" && defined(slug.current)][].slug.current`;
-  const slugs: string[] = await sanityClient.fetch(query);
+  const blogQuery = `*[_type == "blog" && defined(slug.current)][].slug.current`;
+  const slugs: string[] = await sanityClient.fetch(blogQuery);
 
   return slugs.map((slug) => ({
     slug,

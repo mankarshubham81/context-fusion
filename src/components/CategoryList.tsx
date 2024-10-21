@@ -1,12 +1,6 @@
 // components/CategoryList.tsx
+import { CategoryListProps } from '../app/types';
 
-import { Category } from '../app/types'; // Import the unified Category type
-
-interface CategoryListProps {
-  categories: Category[]; // Array of Category objects
-  onCategoryClick: (category: string) => void;
-  selectedCategory: string; // Add the selected category as a prop
-}
 
 const CategoryList = ({ categories, onCategoryClick, selectedCategory }: CategoryListProps) => {
   return (

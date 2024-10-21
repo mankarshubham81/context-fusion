@@ -6,24 +6,9 @@ import { client as sanityClient } from "../../sanity/lib/client";
 import logoSrc from "../../../static/images/context_fusion.png";
 import { PortableTextBlock as PTBlock, PortableTextSpan, ArbitraryTypedObject } from '@portabletext/types';
 import PortableText from './../../components/PortableText';
+import { authorQuery } from "@/sanity/lib/queries";
+import { Author } from "../types";
 
-interface Author {
-  name: string;
-  slug: { current: string };
-  image: {
-    asset: {
-      url: string;
-    };
-    alt?: string;
-  };
-  // bio: { children: { text: string }[] }[];
-  bio: PortableTextBlock[];
-  socialLinks: { platform: string; url: string }[];
-}
-
-export interface PortableTextBlock extends PTBlock {
-  children: (ArbitraryTypedObject | PortableTextSpan)[];
-}
 
 // interface SocialIconProps {
 //   href: string;
@@ -43,21 +28,7 @@ const About = () => {
 
   useEffect(() => {
     const fetchAuthor = async () => {
-      // *[_type == "author" && slug.current == "your-slug"]{
-      const data = await sanityClient.fetch(`
-        *[_type == "author"]{
-          name,
-          slug,
-          image{
-            asset->{
-              _id,
-              url
-            }
-          },
-          bio,
-          socialLinks
-        }[0]
-      `);
+      const data = await sanityClient.fetch(authorQuery);
       setAuthor(data);
     };
 
@@ -102,9 +73,6 @@ const About = () => {
   return (
     <section className="min-h-screen mt-12 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
       <div className="w-full px-4">
-        {/* <h1 className="text-center text-4xl font-bold text-gray-800 dark:text-white mb-8">
-          Context Fusion
-        </h1> */}
         <h2 className="text-center text-3xl font-semibold" >
           {`My Name Is ${author.name}`}{" "}
         </h2>
@@ -138,27 +106,11 @@ const About = () => {
             </div>
           </div>
 
-          {/* Text Section */}
           <div className="mt-8 w-full sm:px-8 md:mt-0 md:pl-12">
-            {/* <h2 className="text-2xl font-semibold" >
-              {`My Name Is ${author.name}`}{" "}
-            </h2> */}
-            {/* <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-200 mb-4">
-              <p
-                className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block"
-              >
-                {`I'm ${text}`}
-              </p>
-              <span className="blinking-cursor text-customBlue font-bold">|</span>
-            </h2> */}
             <div className="text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
             <PortableText content={author.bio} />
-              {/* {author.bio.map((block, index) => (
-                <p key={index}>{block.children[0].text}</p>
-              ))} */}
             </div>
 
-            {/* Social Media Icons */}
             <div className="mt-4">
               <div className="flex flex-col items-center md:items-center">
                 <h3 className="text-xl font-semibold mb-4">Connect with me</h3>

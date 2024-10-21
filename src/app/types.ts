@@ -128,3 +128,27 @@ export interface VideoBlock extends PTBlock {
   url: string; // URL of the video (e.g., YouTube, Vimeo, or direct video file)
   title?: string; // Optional title for the video
 }
+
+export interface Author {
+  name: string;
+  slug: { current: string };
+  image: {
+    asset: {
+      url: string;
+    };
+    alt?: string;
+  };
+  // bio: { children: { text: string }[] }[];
+  bio: PortableTextBlock[];
+  socialLinks: { platform: string; url: string }[];
+}
+
+export interface PortableTextBlock extends PTBlock {
+  children: (ArbitraryTypedObject | PortableTextSpan)[];
+}
+
+export interface CategoryListProps {
+  categories: Category[]; // Array of Category objects
+  onCategoryClick: (category: string) => void;
+  selectedCategory: string; // Add the selected category as a prop
+}

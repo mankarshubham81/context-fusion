@@ -7,28 +7,9 @@ import BlogPost from '../components/BlogPost';
 import CategoryList from '../components/CategoryList';
 import Pagination from '../components/Pagination';
 import About from './about/page';
+import { postsQuery } from '@/sanity/lib/queries';
+import { categoriesQuery } from '@/sanity/lib/queries';
 
-const postsQuery = `*[_type == "post"]{
-  title,
-  slug,
-  "authorName": author->name,
-  mainImage{
-    asset->{url},
-    alt
-  },
-  categories[]->{
-    title,
-    slug
-  },
-  publishedAt,
-  excerpt,
-  readingTime
-}`;
-
-const categoriesQuery = `*[_type == "category"] | order(title asc) {
-  title,
-  slug
-}`;
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -92,8 +73,6 @@ const Home = () => {
     <div className="bg-gray-200 dark:bg-gray-950 min-h-screen">
       <main className="left-[calc(-50vw+50%)] relative overflow-hidden sm:mx-1 md:mx-1 py-2 px-2 sm:p-4">
         <About />
-
-        {/* <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-16"> */}
         <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-4">
           <aside className="md:col-span-2 sm:col-span-1">
             <CategoryList
