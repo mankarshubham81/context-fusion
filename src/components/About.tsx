@@ -107,6 +107,7 @@ const About = () => {
                   className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-1000 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
                     activeImage === index ? "opacity-100" : "opacity-5"
                   }`}
+                  priority
                   loading="eager"
                 />
               ))}
