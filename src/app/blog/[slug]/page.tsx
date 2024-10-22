@@ -19,9 +19,6 @@ export async function generateMetadata({ params }: BlogProps): Promise<Metadata>
     return notFound();
   }
 
-
-  console.log("ppp", post)
-
   return {
     title: `${post.seoTitle || post.title} | Context Fusion`,
     description: post.seoDescription || post.excerpt,
