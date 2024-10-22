@@ -79,6 +79,16 @@ export default defineType({
       title: 'SEO Title',
       type: 'string',
     }),
+    // SEO Keywords for better search optimization
+    defineField({
+      name: 'metaKeywords',
+      title: 'Meta Keywords',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
+    }),
     // SEO Description for search optimization
     defineField({
       name: 'seoDescription',

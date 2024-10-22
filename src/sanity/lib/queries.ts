@@ -1,19 +1,48 @@
 // queries.ts
+// export const blogPostsQuery = `
+//   *[_type == "post"]{
+//     _id,
+//     title,
+//     "author": author->name,
+//     "category": categories[]->title,
+//     slug,
+//     mainImage{
+//       asset->{
+//         url
+//       }
+//     },
+//     publishedAt,
+//     excerpt
+//   } | order(publishedAt desc)
+// `;
+
 export const blogPostsQuery = `
-  *[_type == "post"]{
-    _id,
-    title,
-    "author": author->name,
-    "category": categories[]->title,
-    slug,
-    mainImage{
-      asset->{
-        url
-      }
+*[_type == "post"]{
+  title,
+  "slug": slug.current,
+  "author": author->name,
+  mainImage{
+    asset->{
+      _id,
+      url
     },
-    publishedAt,
-    excerpt
-  } | order(publishedAt desc)
+    alt
+  },
+  categories[]->{
+    title
+  },
+  publishedAt,
+  excerpt,
+  readingTime,
+  seoTitle,
+  metaKeywords,
+  seoDescription,
+  body,
+  relatedPosts[]->{
+    title,
+    "slug": slug.current
+  }
+} | order(publishedAt desc)
 `;
 
 
@@ -52,7 +81,11 @@ export const blogQuery = `*[_type == "post" && slug.current == $slug][0]{
   },
   publishedAt,
   body,  
-  excerpt
+  excerpt,
+  readingTime,
+  seoTitle,
+  metaKeywords,
+  seoDescription
 }`;
 
 // *[_type == "author" && slug.current == "your-slug"]{
