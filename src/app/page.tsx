@@ -101,7 +101,7 @@ const Home = () => {
                 currentPosts.map((post) => (
                   <div
                     key={post.slug.current}
-                    className="transition-transform duration-300 rounded-md shadow-lg hover:scale-105"
+                    className="rounded-md shadow-lg hover:[filter:drop-shadow(0_0_1em_#7C3AED)]"
                   >
                     <BlogPost
                       slug={post.slug.current}
