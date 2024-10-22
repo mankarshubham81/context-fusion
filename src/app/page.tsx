@@ -70,8 +70,8 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gray-200 dark:bg-gray-950">
-      <main className="mx-auto relative overflow-hidden sm:mx-1 md:mx-1 py-2 px-2 sm:p-4">
+    <div className="bg-gray-200 dark:bg-gray-950 max-w-screen-2xl mx-auto ">
+      <main className="relative overflow-hidden sm:mx-1 md:mx-1 py-2 px-2 sm:p-4">
         <About />
         <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-4">
           <aside className="md:col-span-2 sm:col-span-1">

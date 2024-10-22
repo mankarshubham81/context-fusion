@@ -6,10 +6,19 @@ import PortableText from '../../../components/PortableText';
 import Image from 'next/image';
 import Head from 'next/head';
 import { blogQuery } from '@/sanity/lib/queries';
+// import { formatToShortIST } '../../../l'
+import { formatToShortIST } from './../../../utils/formatIst';
+ 
 
 interface BlogProps {
   params: { slug: string };
 }
+
+// export const metadata: Metadata = {
+//   title: "- Perception on Context",
+//   description: "Crafted by Context Fusion",
+//   icons: "post?.mainImage?.asset.url"
+// };
 
 const Blog = async ({ params }: BlogProps) => {
   const { slug } = params;
@@ -17,23 +26,23 @@ const Blog = async ({ params }: BlogProps) => {
 
   // Helper function to format date for SEO and user readability
   // Note: name seprate function for it for use this function for multiple cases 
-  const formatToShortIST = (dateString: string) => {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'short',
-      day: '2-digit',
-      timeZone: 'Asia/Kolkata',
-      // year: 'numeric',
-      // month: 'long',
-      // day: 'numeric',
-      // hour: '2-digit',
-      // minute: '2-digit',
-      // second: '2-digit',
-      // timeZone: 'Asia/Kolkata',
-      // timeZoneName: 'short',
-    };
-    return new Intl.DateTimeFormat('en-IN', options).format(new Date(dateString));
-  };
+  // const formatToShortIST = (dateString: string) => {
+  //   const options: Intl.DateTimeFormatOptions = {
+  //     year: 'numeric',
+  //     month: 'short',
+  //     day: '2-digit',
+  //     timeZone: 'Asia/Kolkata',
+  //     // year: 'numeric',
+  //     // month: 'long',
+  //     // day: 'numeric',
+  //     // hour: '2-digit',
+  //     // minute: '2-digit',
+  //     // second: '2-digit',
+  //     // timeZone: 'Asia/Kolkata',
+  //     // timeZoneName: 'short',
+  //   };
+  //   return new Intl.DateTimeFormat('en-IN', options).format(new Date(dateString));
+  // };
 
   const post: BlogPost = await sanityClient.fetch(blogQuery, { slug });
   // console.log("ppp",post)
