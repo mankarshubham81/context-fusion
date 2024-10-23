@@ -74,7 +74,7 @@ const BlogPage = ({ posts, categories }: BlogPageProps) => {
           <section className="md:col-span-4">
             {/* Search Bar */}
             <div className="relative mb-4 flex items-center">
-              <FaSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-500 dark:text-gray-300" />
+              <FaSearch className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 dark:text-gray-300" />
               <input
                 type="text"
                 placeholder="Search blog posts..."

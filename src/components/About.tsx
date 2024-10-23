@@ -104,7 +104,7 @@ const About = () => {
                   alt={`Image of ${author.name}`}
                   width={400}
                   height={400}
-                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-1000 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
+                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
                     activeImage === index ? "opacity-100" : "opacity-5"
                   }`}
                   loading="lazy" // Optional, but this is the default behavior
@@ -126,18 +126,22 @@ const About = () => {
                   <SocialIcon
                     href={`${author.socialLinks[0].url}`}
                     icon={<FaGithub size={"25px"} />}
-                  />
+                    platform={author.socialLinks[0].platform}
+                    />
                   <SocialIcon
                     href={`${author.socialLinks[1].url}`}
                     icon={<FaLinkedin size={"25px"} />}
-                  />
+                    platform={author.socialLinks[1].platform}
+                    />
                   <SocialIcon
                     href={`${author.socialLinks[2].url}`}
                     icon={<FaInstagram size={"25px"} />}
-                  />
+                    platform={author.socialLinks[2].platform}
+                    />
                   <SocialIcon
                     href={`${author.socialLinks[3].url}`}
                     icon={<FaTwitter size={"25px"} />}
+                    platform={author.socialLinks[3].platform}
                   />
                 </div>
               </div>
@@ -149,12 +153,13 @@ const About = () => {
   );
 };
 
-const SocialIcon = ({ href, icon }: { href: string; icon: JSX.Element }) => (
+const SocialIcon = ({ href, icon, platform }: { href: string; icon: JSX.Element; platform: string }) => (
   <a
     href={href}
     className="hover:text-blue-500"
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={platform}
   >
     {icon}
   </a>

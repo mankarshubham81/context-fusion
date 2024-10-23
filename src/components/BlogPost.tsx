@@ -3,26 +3,6 @@ import Image from 'next/image';
 import Head from 'next/head';
 import { formatToShortIST } from '@/utils/formatIst';
 
-// Helper function to format date for SEO and user readability
-// Note: name seprate function for it for use this function for multiple cases 
-// const formatToShortIST = (dateString: string) => {
-//   const options: Intl.DateTimeFormatOptions = {
-//     year: 'numeric',
-//     month: 'short',
-//     day: '2-digit',
-//     timeZone: 'Asia/Kolkata',
-//     // year: 'numeric',
-//     // month: 'long',
-//     // day: 'numeric',
-//     // hour: '2-digit',
-//     // minute: '2-digit',
-//     // second: '2-digit',
-//     // timeZone: 'Asia/Kolkata',
-//     // timeZoneName: 'short',
-//   };
-//   return new Intl.DateTimeFormat('en-IN', options).format(new Date(dateString));
-// };
-
 interface BlogPostProps {
   title: string;
   excerpt: string;
@@ -96,7 +76,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
           <h2 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
             {title}
           </h2>
-          <div className="flex items-center text-sm text-gray-500 mb-2">
+          <div className="flex items-center text-sm text-gray-400 mb-2">
             <time dateTime={date} itemProp="datePublished">
               {formatToShortIST(date)} {/* Shorter date format for SEO */}
             </time>
@@ -107,12 +87,12 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
             {excerpt}
           </p>
           <div className="flex justify-between items-center">
-            <span className="text-white bg-purple-900 rounded-full px-2.5 py-2 text-sm font-semibold">
+            <span className="text-white bg-purple-900 rounded-full px-3 py-2.5 text-sm font-semibold">
               {category}
             </span>
-            <Link href={`/blog/${slug}`} className="block">
-              <button
-                className={`px-4 py-2 sm:my-2 mx-4
+
+            <button
+              className={`px-4 py-2 sm:my-2 mx-4
                 text-white
                 border-2
                 dark:bg-black
@@ -121,11 +101,14 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
                 rounded-md
                 border-customBlue hover:text-white hover:bg-black dark:hover:bg-customBlue
                 duration-200 ease-in-out
-                focus:outline-none focus:ring-2 focus:ring-gray-500`}
-              >
+                focus:outline-none focus:ring-2 focus:ring-gray-500
+                min-h-[48px] min-w-[48px]  // Ensure minimum touch target size
+              `}
+            >
+              <Link href={`/blog/${slug}`} className="block">
                 Read More...
-              </button>
-            </Link>
+              </Link>
+            </button>
           </div>
         </div>
       </article>
