@@ -4,7 +4,7 @@ import { client as sanityClient } from "../sanity/lib/client";
 import { BlogPostData, Category } from "../app/types";
 import { postsQuery, categoriesQuery } from "@/sanity/lib/queries";
 import BlogPage from "@/components/BlogPage"; // Client Component
-// import About from "@/components/About";
+import About from "@/components/About";
 
 // Server-side function to fetch data
 async function getData() {
@@ -26,7 +26,7 @@ export default async function Home() {
   return (
     <div>
       {/* Pass fetched data to the client component */}
-      {/* <About/> */}
+      <About/>
       <BlogPage posts={posts} categories={categories} />
     </div>
   );

@@ -78,11 +78,7 @@ const About = () => {
 
   if (!author) return <p>Loading...</p>;
 
-  // Extract URLs and blurDataURL for LQIP
-  const images = [
-    { url: author.image.asset.url, blurDataURL: undefined }, // External URL, no blurDataURL
-    { url: logoSrc.src, blurDataURL: logoSrc.blurDataURL } // Imported image
-  ];
+  const images = [author.image.asset.url, logoSrc];
 
   return (
     <section className="min-h-80 mt-12 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
@@ -104,17 +100,15 @@ const About = () => {
               {images.map((image, index) => (
                 <Image
                   key={index}
-                  src={image.url}
+                  src={image}
                   alt={`Image of ${author.name}`}
                   width={400}
                   height={400}
-                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-700 ${
-                    activeImage === index ? "opacity-100" : "opacity-0"
+                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-1000 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
+                    activeImage === index ? "opacity-100" : "opacity-5"
                   }`}
-                  priority={index === 0} // Prioritize first image for LCP
-                  loading={index === 0 ? "eager" : "lazy"} // Eager load LCP image, lazy load others
-                  blurDataURL={image.blurDataURL || undefined} // Conditionally apply blurDataURL
-                  placeholder={image.blurDataURL ? "blur" : undefined} // Apply blur placeholder only for imported images
+                  loading="lazy" // Optional, but this is the default behavior
+                  priority={false} // Ensures lazy loading is applied
                 />
               ))}
             </div>
