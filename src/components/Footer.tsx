@@ -97,10 +97,26 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-center">
             <h3 className="text-xl font-semibold mb-4">Follow Me</h3>
             <div className="flex space-x-6">
-              <SocialIcon href="https://github.com/mankarshubham81" icon={<FaGithub size={'25px'} />} />
-              <SocialIcon href="https://linkedin.com/in/mankarshubham81" icon={<FaLinkedin size={'25px'} />} />
-              <SocialIcon href="https://www.instagram.com/mankarshubham81/" icon={<FaInstagram size={'25px'} />} />
-              <SocialIcon href="https://twitter.com/mankarshubham81" icon={<FaTwitter size={'25px'} />} />
+              <SocialIcon
+                href={"https://github.com/mankarshubham81"}
+                icon={<FaGithub size={"25px"} />}
+                platform={"Github"}
+                />
+              <SocialIcon
+                href={"https://linkedin.com/in/mankarshubham81"}
+                icon={<FaLinkedin size={"25px"} />}
+                platform={"Linkedin"}
+                />
+              <SocialIcon
+                href={"https://www.instagram.com/mankarshubham81/"}
+                icon={<FaInstagram size={"25px"} />}
+                platform={"Instagram"}
+                />
+              <SocialIcon
+                href={"https://twitter.com/mankarshubham81"}
+                icon={<FaTwitter size={"25px"} />}
+                platform={"Twitter"}
+              />
             </div>
           </div>
         </div>
@@ -114,8 +130,14 @@ export default function Footer() {
   );
 }
 
-const SocialIcon: React.FC<SocialIconProps> = ({ href, icon }) => (
-  <a href={href} className="hover:text-blue-500" target="_blank" rel="noopener noreferrer">
+const SocialIcon = ({ href, icon, platform }: { href: string; icon: JSX.Element; platform: string }) => (
+  <a
+    href={href}
+    className="hover:text-blue-500"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={platform}
+  >
     {icon}
   </a>
 );
