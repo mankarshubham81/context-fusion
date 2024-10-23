@@ -32,7 +32,7 @@ const ContactForm = () => {
           {/* Name Field */}
           <div className="flex-1">
             <label
-              className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
+              className="block text-gray-700  dark:text-gray-200 text-base font-medium mb-2"
               htmlFor="name"
             >
               Your Name
@@ -53,7 +53,7 @@ const ContactForm = () => {
           {/* Email Field */}
           <div className="flex-1">
             <label
-              className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
+              className="block text-gray-700 dark:text-gray-200 text-base font-medium mb-2"
               htmlFor="email"
             >
               Your Email
@@ -74,7 +74,7 @@ const ContactForm = () => {
         {/* Subject */}
         <div className="mb-6">
           <label
-            className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
+            className="block text-gray-700 dark:text-gray-200 text-base font-medium mb-2"
             htmlFor="subject"
           >
             Subject
@@ -95,7 +95,7 @@ const ContactForm = () => {
         {/* Message */}
         <div className="mb-6">
           <label
-            className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-2"
+            className="block text-gray-700 dark:text-gray-200 text-base font-medium mb-2"
             htmlFor="message"
           >
             Message
