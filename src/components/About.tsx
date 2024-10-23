@@ -78,14 +78,18 @@ const About = () => {
 
   if (!author) return <p>Loading...</p>;
 
-  const images = [author.image.asset.url, logoSrc];
+  // Extract URLs and blurDataURL for LQIP
+  const images = [
+    { url: author.image.asset.url, blurDataURL: undefined }, // External URL, no blurDataURL
+    { url: logoSrc.src, blurDataURL: logoSrc.blurDataURL } // Imported image
+  ];
 
   return (
     <section className="min-h-80 mt-12 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
       <div className="w-full px-4">
-        <h2 className="text-center text-3xl font-semibold">
+        <h1 className="text-center text-3xl font-semibold">
           {`My Name Is ${author.name}`}{" "}
-        </h2>
+        </h1>
         <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-white mb-4">
           <p className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block">
             {`I'm ${text}`}
@@ -100,15 +104,17 @@ const About = () => {
               {images.map((image, index) => (
                 <Image
                   key={index}
-                  src={image}
+                  src={image.url}
                   alt={`Image of ${author.name}`}
                   width={400}
                   height={400}
-                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-1000 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
-                    activeImage === index ? "opacity-100" : "opacity-5"
+                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-700 ${
+                    activeImage === index ? "opacity-100" : "opacity-0"
                   }`}
-                  priority
-                  loading="eager"
+                  priority={index === 0} // Prioritize first image for LCP
+                  loading={index === 0 ? "eager" : "lazy"} // Eager load LCP image, lazy load others
+                  blurDataURL={image.blurDataURL || undefined} // Conditionally apply blurDataURL
+                  placeholder={image.blurDataURL ? "blur" : undefined} // Apply blur placeholder only for imported images
                 />
               ))}
             </div>
