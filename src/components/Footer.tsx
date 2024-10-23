@@ -10,10 +10,10 @@ import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import Image from 'next/image';
 import logoSrc from '../../static/images/context_fusion.png';
 // import { FETCH_FOOTER } from './../../../sanity/queries/footer/fetch-footer';
-interface SocialIconProps {
-  href: string;
-  icon: JSX.Element;
-}
+// interface SocialIconProps {
+//   href: string;
+//   icon: JSX.Element;
+// }
 
 interface UsefulLink {
   _key: string;
