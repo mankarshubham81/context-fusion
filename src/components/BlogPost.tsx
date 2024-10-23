@@ -93,9 +93,9 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
           />
         </header>
         <div className="p-6">
-          <h1 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
+          <h2 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
             {title}
-          </h1>
+          </h2>
           <div className="flex items-center text-sm text-gray-500 mb-2">
             <time dateTime={date} itemProp="datePublished">
               {formatToShortIST(date)} {/* Shorter date format for SEO */}
