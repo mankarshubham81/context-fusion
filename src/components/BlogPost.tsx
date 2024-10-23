@@ -72,29 +72,29 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
             alt={title} // Ensure good alt text for accessibility
           />
         </header>
-        <div className="p-6">
-          <h2 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
+          <h2 className="text-2xl font-bold leading-tight mb-2 mx-2 mt-2" itemProp="headline">
             {title}
           </h2>
-          <div className="flex items-center text-sm text-gray-400 mb-2">
+          <div className="flex items-center text-sm text-gray-400 mb-2 mx-2">
             <time dateTime={date} itemProp="datePublished">
               {formatToShortIST(date)} {/* Shorter date format for SEO */}
             </time>
             <span className="mx-2">•</span>
             <span itemProp="author">{author}</span>
           </div>
-          <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+          <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 mx-2">
             {excerpt}
           </p>
           <div className="flex justify-between items-center">
-            <span className="text-white bg-purple-900 rounded-full px-3 py-2.5 text-sm font-semibold">
+            <span className="text-white shrink-0 bg-purple-900 rounded-full px-4 py-2  ml-2 text-sm font-semibold">
               {category}
             </span>
 
             <button
-              className={`px-4 py-2 sm:my-2 mx-4
+              className={`px-4 py-2 mr-2
                 text-white
                 border-2
+                shrink-0
                 dark:bg-black
                 bg-customBlue
                 transition-all
@@ -102,15 +102,14 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
                 border-customBlue hover:text-white hover:bg-black dark:hover:bg-customBlue
                 duration-200 ease-in-out
                 focus:outline-none focus:ring-2 focus:ring-gray-500
-                min-h-[48px] min-w-[48px]  // Ensure minimum touch target size
+                min-h-[48px] min-w-[48px]
               `}
             >
-              <Link href={`/blog/${slug}`} className="block">
+              <Link href={`/blog/${slug}`}>
                 Read More...
               </Link>
             </button>
           </div>
-        </div>
       </article>
     </>
   );

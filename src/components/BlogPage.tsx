@@ -58,10 +58,10 @@ const BlogPage = ({ posts, categories }: BlogPageProps) => {
   };
 
   return (
-    <div className="bg-gray-200 dark:bg-gray-950 max-w-screen-2xl mx-auto my-16">
+    <div className=" max-w-screen-2xl mx-auto my-16">
       <main className="relative overflow-hidden sm:mx-1 md:mx-1 py-2 px-2 sm:p-4">
         {/* Sidebar for categories */}
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-3 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-3 mt-4">
           <aside className="md:col-span-2 sm:col-span-1">
             <CategoryList
               categories={categories}
