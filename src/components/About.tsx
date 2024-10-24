@@ -83,7 +83,7 @@ const About = () => {
 
   return (
     <section className="min-h-80 mt-12 mx-3 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
-      <div className="w-full px-3">
+      <div className="max-w-screen-2xl mx-auto w-full px-3">
         <h1 className="text-center text-3xl font-semibold">
           {`My Name Is ${author.name}`}{" "}
         </h1>
