@@ -3,8 +3,8 @@ import { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../sanity/lib/client";
-import logoSrc from "../../static/images/context_fusion.png"
-import imageSrc from "../../static/images/si1.jpg"
+import logoSrc from "../../static/images/context_fusion.png";
+import imageSrc from "../../static/images/si1.jpg";
 import PortableText from "./PortableText";
 import { authorQuery } from "@/sanity/lib/queries";
 import { Author } from "@/app/types";
@@ -13,13 +13,11 @@ const About = () => {
   const [author, setAuthor] = useState<Author | null>(null);
   const [activeImage, setActiveImage] = useState(0);
 
-  // Typewriter state
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(200);
 
-  // Memoized typewriter words array
   const typewriterWords = useMemo(
     () => [
       "Software Engineer",
@@ -52,7 +50,6 @@ const About = () => {
     return () => clearInterval(imageTransitionInterval);
   }, []);
 
-  // Typewriter effect logic
   useEffect(() => {
     const handleTyping = () => {
       const currentWord = typewriterWords[loopNum % typewriterWords.length];
@@ -68,7 +65,7 @@ const About = () => {
         setTimeout(() => setIsDeleting(true), 1000); // Delay before deleting
       } else if (isDeleting && text === "") {
         setIsDeleting(false);
-        setLoopNum((prevLoopNum) => prevLoopNum + 1); // Functional update
+        setLoopNum((prevLoopNum) => prevLoopNum + 1);
       }
     };
 
@@ -94,23 +91,20 @@ const About = () => {
           <span className="blinking-cursor text-customBlue font-bold">|</span>
         </h2>
 
-        <div className="flex w-full flex-col md:flex-row items-center justify-between sm:mx-4">
-          {/* Image Section */}
-          <div className="gap-1 shrink-0">
-            <div className="relative w-80 h-80 mx-1">
-              {images.map((image, index) => (
-                <Image
-                  key={index}
-                  src={image}
-                  alt={`Image of ${author.name}`}
-                  width={400}
-                  height={400}
-                  className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
-                    activeImage === index ? "opacity-100" : "opacity-5"
-                  }`}
-                />
-              ))}
-            </div>
+        <div className="flex w-full flex-col lg:flex-row items-center justify-between sm:mx-4">
+          <div className="relative w-80 h-80 mx-1">
+            {images.map((image, index) => (
+              <Image
+                key={index}
+                src={image}
+                alt={`Image of ${author.name}`}
+                width={400}
+                height={400}
+                className={`absolute top-0 left-0 object-cover rounded-full shadow-lg transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
+                  activeImage === index ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))}
           </div>
 
           <div className="mt-8 w-full sm:px-8 md:mt-0 md:pl-12">
@@ -123,24 +117,24 @@ const About = () => {
                 <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
                 <div className="flex space-x-6">
                   <SocialIcon
-                    href={`${author.socialLinks[0].url}`}
-                    icon={<FaGithub size={"25px"} />}
-                    platform={author.socialLinks[0].platform}
-                    />
+                    href={author.socialLinks[0].url}
+                    icon={<FaGithub size="25px" />}
+                    platform="GitHub"
+                  />
                   <SocialIcon
-                    href={`${author.socialLinks[1].url}`}
-                    icon={<FaLinkedin size={"25px"} />}
-                    platform={author.socialLinks[1].platform}
-                    />
+                    href={author.socialLinks[1].url}
+                    icon={<FaLinkedin size="25px" />}
+                    platform="LinkedIn"
+                  />
                   <SocialIcon
-                    href={`${author.socialLinks[2].url}`}
-                    icon={<FaInstagram size={"25px"} />}
-                    platform={author.socialLinks[2].platform}
-                    />
+                    href={author.socialLinks[2].url}
+                    icon={<FaInstagram size="25px" />}
+                    platform="Instagram"
+                  />
                   <SocialIcon
-                    href={`${author.socialLinks[3].url}`}
-                    icon={<FaTwitter size={"25px"} />}
-                    platform={author.socialLinks[3].platform}
+                    href={author.socialLinks[3].url}
+                    icon={<FaTwitter size="25px" />}
+                    platform="Twitter"
                   />
                 </div>
               </div>
@@ -155,10 +149,10 @@ const About = () => {
 const SocialIcon = ({ href, icon, platform }: { href: string; icon: JSX.Element; platform: string }) => (
   <a
     href={href}
-    className="hover:text-blue-500"
+    aria-label={`Link to ${platform}`}
     target="_blank"
     rel="noopener noreferrer"
-    aria-label={platform}
+    className="hover:text-blue-500"
   >
     {icon}
   </a>

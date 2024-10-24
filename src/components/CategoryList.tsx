@@ -4,10 +4,10 @@ import { CategoryListProps } from '../app/types';
 
 const CategoryList = ({ categories, onCategoryClick, selectedCategory }: CategoryListProps) => {
   return (
-    <div className="bg-gray-100 text-gray-900 dark:bg-gray-800 px-1 sm:px-6 py-2 rounded-lg shadow-2xl">
+    <div className="w-full bg-gray-100 text-gray-900 dark:bg-gray-800 px-1 sm:px-6 py-2 rounded-lg shadow-2xl my-3">
 
       {/* Horizontal scrollable list for mobile */}
-      <div className="block md:hidden lg:hidden">
+      <div className="block">
         <div className="flex gap-1">
           <h2 className="text-lg font-bold pl-1 dark:bg-gray-800 dark:text-gray-200 rounded py-1">Categories</h2>
           <div className="flex space-x-2 overflow-x-auto scrollbar-hide px-2">
@@ -39,7 +39,7 @@ const CategoryList = ({ categories, onCategoryClick, selectedCategory }: Categor
       </div>
 
       {/* Original list for larger screens */}
-      <ul className="hidden md:block lg:block space-y-3 text-center mt-0.5 sm:m-0.5">
+      {/* <ul className="hidden md:block lg:block space-y-3 text-center mt-0.5 sm:m-0.5">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-200">Categories</h2>
         <li
           onClick={() => onCategoryClick('All')}
@@ -64,7 +64,7 @@ const CategoryList = ({ categories, onCategoryClick, selectedCategory }: Categor
             {category.title}
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
