@@ -72,26 +72,29 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
             alt={title} // Ensure good alt text for accessibility
           />
         </header>
-          <h2 className="text-2xl font-bold leading-tight mb-2 mx-2 mt-2" itemProp="headline">
+        <div className="p-6">
+          <h2 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
             {title}
           </h2>
-          <div className="flex items-center text-sm text-gray-400 mb-2 mx-2">
+          <div className="flex items-center text-sm text-gray-400 mb-2">
             <time dateTime={date} itemProp="datePublished">
               {formatToShortIST(date)} {/* Shorter date format for SEO */}
             </time>
             <span className="mx-2">•</span>
             <span itemProp="author">{author}</span>
           </div>
-          <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 mx-2">
+          <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
             {excerpt}
           </p>
           <div className="flex justify-between items-center">
-            <span className="text-white shrink-0 bg-purple-900 rounded-full px-4 py-2  ml-2 text-sm font-semibold">
+            {/* Category badge with optimized touch target size */}
+            <span className="text-white shrink-0 bg-purple-900 rounded-full px-4 py-2 text-sm font-semibold">
               {category}
             </span>
 
+            {/* "Read More" button with sufficient touch target size */}
             <button
-              className={`px-4 py-2 mr-2
+              className={`px-4 py-2
                 text-white
                 border-2
                 shrink-0
@@ -110,6 +113,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
               </Link>
             </button>
           </div>
+        </div>
       </article>
     </>
   );
