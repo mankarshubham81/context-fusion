@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../sanity/lib/client";
 import logoSrc from "../../static/images/context_fusion.png"
+import imageSrc from "../../static/images/si1.jpg"
 import PortableText from "./PortableText";
 import { authorQuery } from "@/sanity/lib/queries";
 import { Author } from "@/app/types";
@@ -78,7 +79,7 @@ const About = () => {
 
   if (!author) return <p>Loading...</p>;
 
-  const images = [author.image.asset.url, logoSrc];
+  const images = [imageSrc, logoSrc];
 
   return (
     <section className="min-h-80 mt-12 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
@@ -107,8 +108,7 @@ const About = () => {
                   className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
                     activeImage === index ? "opacity-100" : "opacity-5"
                   }`}
-                  loading="lazy" // Optional, but this is the default behavior
-                  priority={false} // Ensures lazy loading is applied
+                  priority
                 />
               ))}
             </div>
