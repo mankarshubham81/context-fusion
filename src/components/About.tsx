@@ -82,8 +82,8 @@ const About = () => {
   const images = [imageSrc, logoSrc];
 
   return (
-    <section className="min-h-80 mt-12 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
-      <div className="w-full px-4">
+    <section className="min-h-80 mt-12 mx-3 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
+      <div className="w-full px-3">
         <h1 className="text-center text-3xl font-semibold">
           {`My Name Is ${author.name}`}{" "}
         </h1>
@@ -108,7 +108,6 @@ const About = () => {
                   className={`absolute top-0 left-0 object-cover rounded-full shadow-lg ease-in-out transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
                     activeImage === index ? "opacity-100" : "opacity-5"
                   }`}
-                  priority
                 />
               ))}
             </div>
