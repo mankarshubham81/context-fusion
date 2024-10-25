@@ -4,10 +4,11 @@ import dynamic from "next/dynamic";
 // import ThemeProvider from "@/components/ThemeProvider";
 import { ThemeProvider } from 'next-themes';
 import { Metadata } from "next";
-
+import Navbar from '@/components/Navbar';
+// import Footer from '@/components/Footer'; 
 const inter = Inter({ subsets: ["latin"] });
 
-const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
+// const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
 const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
 
 export const metadata: Metadata = {
@@ -53,7 +54,7 @@ export default function RootLayout({
       <head>
       <script defer src="https://cloud.umami.is/script.js" data-website-id="5aaf48b2-433e-4c94-8711-d3c4a96dd240"></script>
       </head>
-      <body className="antialiased font-serif">
+      <body  className="antialiased font-serif">
         <ThemeProvider attribute="class">
           <Navbar />
           <main>{children}</main>

@@ -1,94 +1,43 @@
-"use client";
-import { useEffect, useState, useMemo } from "react";
+// About.tsx
 import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../sanity/lib/client";
 import logoSrc from "../../static/images/context_fusion.png";
 import imageSrc from "../../static/images/si1.jpg";
 import PortableText from "./PortableText";
+import Typewriter from "../components/Typewriter";
 import { authorQuery } from "@/sanity/lib/queries";
 import { Author } from "@/app/types";
 
-const About = () => {
-  const [author, setAuthor] = useState<Author | null>(null);
-  const [activeImage, setActiveImage] = useState(0);
+export const dynamic = "force-static"; // Optimize for static rendering
 
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(200);
-
-  const typewriterWords = useMemo(
-    () => [
-      "Software Engineer",
-      "Full Stack Developer",
-      "Footballer",
-      "Karateka",
-      "Web Developer",
-      "Photographer",
-      "Skater",
-      "Shuttler",
-      "Blogger",
-      "Writer",
-      "Vadak",
-    ],
-    []
-  );
-
-  useEffect(() => {
-    const fetchAuthor = async () => {
-      const data = await sanityClient.fetch(authorQuery);
-      setAuthor(data);
-    };
-
-    fetchAuthor();
-
-    const imageTransitionInterval = setInterval(() => {
-      setActiveImage((prevImage) => (prevImage === 0 ? 1 : 0));
-    }, 3800);
-
-    return () => clearInterval(imageTransitionInterval);
-  }, []);
-
-  useEffect(() => {
-    const handleTyping = () => {
-      const currentWord = typewriterWords[loopNum % typewriterWords.length];
-      setText(
-        isDeleting
-          ? currentWord.substring(0, text.length - 1)
-          : currentWord.substring(0, text.length + 1)
-      );
-
-      setTypingSpeed(isDeleting ? 100 : 200);
-
-      if (!isDeleting && text === currentWord) {
-        setTimeout(() => setIsDeleting(true), 1000); // Delay before deleting
-      } else if (isDeleting && text === "") {
-        setIsDeleting(false);
-        setLoopNum((prevLoopNum) => prevLoopNum + 1);
-      }
-    };
-
-    const typingTimeout = setTimeout(handleTyping, typingSpeed);
-
-    return () => clearTimeout(typingTimeout);
-  }, [text, isDeleting, typingSpeed, loopNum, typewriterWords]);
-
-  if (!author) return <p>Loading...</p>;
+const About = async () => {
+  // Fetching author data directly in the server component
+  const author: Author = await sanityClient.fetch(authorQuery);
 
   const images = [imageSrc, logoSrc];
+  const typewriterWords = [
+    "Software Engineer",
+    "Full Stack Developer",
+    "Footballer",
+    "Karateka",
+    "Web Developer",
+    "Photographer",
+    "Skater",
+    "Shuttler",
+    "Blogger",
+    "Writer",
+    "Vadak",
+  ];
 
   return (
     <section className="min-h-80 mt-12 mx-3 sm:mx-4 py-9 bg-gray-100 dark:bg-slate-900 [filter:drop-shadow(0_0_1em_#7C3AED)]">
       <div className="max-w-screen-2xl mx-auto w-full px-3">
         <h1 className="text-center text-3xl font-semibold">
-          {`My Name Is ${author.name}`}{" "}
+          {`My Name Is ${author.name}`}
         </h1>
         <h2 className="text-center text-2xl font-bold text-gray-800 dark:text-white mb-4">
-          <p className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block">
-            {`I'm ${text}`}
-          </p>
-          <span className="blinking-cursor text-customBlue font-bold">|</span>
+          <Typewriter words={typewriterWords} />
         </h2>
 
         <div className="flex w-full flex-col lg:flex-row items-center justify-between sm:mx-4">
@@ -101,7 +50,7 @@ const About = () => {
                 width={400}
                 height={400}
                 className={`absolute top-0 left-0 object-cover rounded-full shadow-lg transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
-                  activeImage === index ? "opacity-100" : "opacity-0"
+                  index === 0 ? "opacity-100" : "opacity-0"
                 }`}
               />
             ))}
@@ -116,26 +65,24 @@ const About = () => {
               <div className="flex flex-col items-center md:items-center">
                 <h3 className="text-xl font-semibold mb-4">Connect with me</h3>
                 <div className="flex space-x-6">
-                  <SocialIcon
-                    href={author.socialLinks[0].url}
-                    icon={<FaGithub size="25px" />}
-                    platform="GitHub"
-                  />
-                  <SocialIcon
-                    href={author.socialLinks[1].url}
-                    icon={<FaLinkedin size="25px" />}
-                    platform="LinkedIn"
-                  />
-                  <SocialIcon
-                    href={author.socialLinks[2].url}
-                    icon={<FaInstagram size="25px" />}
-                    platform="Instagram"
-                  />
-                  <SocialIcon
-                    href={author.socialLinks[3].url}
-                    icon={<FaTwitter size="25px" />}
-                    platform="Twitter"
-                  />
+                  {author.socialLinks.map((link, index) => (
+                    <SocialIcon
+                      key={index}
+                      href={link.url}
+                      icon={
+                        index === 0 ? (
+                          <FaGithub size="25px" />
+                        ) : index === 1 ? (
+                          <FaLinkedin size="25px" />
+                        ) : index === 2 ? (
+                          <FaInstagram size="25px" />
+                        ) : (
+                          <FaTwitter size="25px" />
+                        )
+                      }
+                      platform={link.platform}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -146,7 +93,15 @@ const About = () => {
   );
 };
 
-const SocialIcon = ({ href, icon, platform }: { href: string; icon: JSX.Element; platform: string }) => (
+const SocialIcon = ({
+  href,
+  icon,
+  platform,
+}: {
+  href: string;
+  icon: JSX.Element;
+  platform: string;
+}) => (
   <a
     href={href}
     aria-label={`Link to ${platform}`}
