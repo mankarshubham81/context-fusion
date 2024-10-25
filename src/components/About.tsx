@@ -48,7 +48,6 @@ const About = async () => {
                 src={image}
                 alt={`Image of ${author.name}`}
                 width={400}
-                loading="eager"
                 priority
                 height={400}
                 className={`absolute top-0 left-0 object-cover rounded-full shadow-lg transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${

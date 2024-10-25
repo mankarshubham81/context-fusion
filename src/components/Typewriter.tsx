@@ -1,6 +1,6 @@
 // Typewriter.tsx
 "use client"
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 
 interface TypewriterProps {
   words: string[];
