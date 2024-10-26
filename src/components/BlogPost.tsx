@@ -51,7 +51,7 @@ async function fetchBlogPostData(slug: string) {
 
 const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: BlogPostProps) => {
   return (
-    <article className="relative h-full rounded-lg bg-white dark:bg-gray-900 dark:text-gray-100 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out overflow-hidden">
+    <article className="relative h-full rounded-lg bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out overflow-hidden">
       <header className="relative">
         <Image
           src={`${imageUrl}?w=800&h=450&fit=crop`} // Adjust the image URL with Sanity-specific transformations
