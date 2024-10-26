@@ -82,13 +82,36 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
           <span className="text-white bg-purple-900 rounded-full px-4 py-2 text-sm font-semibold" role="note">
             {category}
           </span>
-          <Link
+          {/* <Link
             href={`/blog/${slug}`}
             aria-label={`Read more about ${title}`}
             className="px-4 py-2 text-white border-2 bg-customBlue dark:bg-black rounded-md border-customBlue hover:bg-black dark:hover:bg-customBlue transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-500"
+            >
+            Read More...
+          </Link> */}
+          <a
+            aria-label={`Read more about ${title}`}
+            href={`/blog/${slug}`}
+            className="
+              px-4 py-2
+              text-white
+              border-2
+              shrink-0
+              dark:bg-black
+              bg-customBlue
+              transition-all
+              rounded-md
+              border-customBlue
+              hover:text-white hover:bg-black
+              dark:hover:bg-customBlue
+              duration-200 ease-in-out
+              focus:outline-none focus:ring-2 focus:ring-gray-500
+              min-h-[48px] min-w-[48px]
+              flex items-center justify-center
+            "
           >
             Read More...
-          </Link>
+          </a>
         </div>
       </div>
     </article>
