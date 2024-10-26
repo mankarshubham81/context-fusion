@@ -57,6 +57,7 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
           alt={`Cover image for ${title}`}
           width={800}
           height={450}
+          priority
           placeholder="blur"
           blurDataURL={`${imageUrl}?w=10&blur=10`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
