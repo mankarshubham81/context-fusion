@@ -1,4 +1,4 @@
-import Link from "next/link";
+// import Link from "next/link";
 import Image from "next/image";
 import { Metadata } from "next";
 import { formatToShortIST } from "@/utils/formatIst";
@@ -15,7 +15,7 @@ interface BlogPostProps {
 
 // Metadata generation for SEO and social sharing
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const { title, excerpt, imageUrl } = await fetchBlogPostData(params.slug);
+  const { title, excerpt, imageUrl, slug } = await fetchBlogPostData(params.slug);
 
   return {
     title,
@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     twitter: {
       card: "summary_large_image",
       title,
-      description: excerpt,
+      description: excerpt + slug,
       images: [imageUrl],
     },
     alternates: {
@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 // Mock async data fetch function
 async function fetchBlogPostData(slug: string) {
   return {
+    slug: slug,
     title: "Sample Title",
     excerpt: "Sample excerpt for SEO.",
     imageUrl: "https://example.com/image.jpg",

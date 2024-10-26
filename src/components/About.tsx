@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../sanity/lib/client";
-import logoSrc from "../../static/images/context_fusion.png";
+// import logoSrc from "../../static/images/context_fusion.png";
 import imageSrc from "../../static/images/si1.jpg";
 import PortableText from "./PortableText";
 import Typewriter from "../components/Typewriter";
