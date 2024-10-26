@@ -1,4 +1,3 @@
-// About.tsx
 import Image from "next/image";
 import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { client as sanityClient } from "../sanity/lib/client";
@@ -12,10 +11,10 @@ import { Author } from "@/app/types";
 export const dynamic = "force-static"; // Optimize for static rendering
 
 const About = async () => {
-  // Fetching author data directly in the server component
   const author: Author = await sanityClient.fetch(authorQuery);
 
-  const images = [imageSrc, logoSrc];
+  // const images = [imageSrc, logoSrc];
+  const images = [imageSrc];
   const typewriterWords = [
     "Software Engineer",
     "Full Stack Developer",
@@ -47,12 +46,13 @@ const About = async () => {
                 key={index}
                 src={image}
                 alt={`Image of ${author.name}`}
-                width={400}
-                priority
-                height={400}
-                className={`absolute top-0 left-0 object-cover rounded-full shadow-lg transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)] ${
-                  index === 0 ? "opacity-100" : "opacity-0"
-                }`}
+                width={300}
+                height={300}
+                priority={index === 0} // Only the first image prioritized
+                className="absolute top-0 left-0 object-cover rounded-full shadow-lg transition-opacity duration-900 [filter:drop-shadow(0_0_2em_#7C3AED)]"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                placeholder="blur"
+                blurDataURL={`${image}?w=10&blur=10`}
               />
             ))}
           </div>
