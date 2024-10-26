@@ -3,8 +3,14 @@
 import { client as sanityClient } from "../sanity/lib/client";
 import { BlogPostData, Category } from "../app/types";
 import { postsQuery, categoriesQuery } from "@/sanity/lib/queries";
-import BlogPage from "@/components/BlogPage"; // Client Component
 import About from "@/components/About";
+import dynamic from "next/dynamic";
+
+// Dynamic import for BlogPage with suspense fallback
+const BlogPage = dynamic(() => import("@/components/BlogPage"), {
+  loading: () => <p>Loading posts...</p>, // Optional loading fallback
+  ssr: false,
+});
 
 // Server-side function to fetch data
 async function getData() {
@@ -18,16 +24,22 @@ async function getData() {
   }
 }
 
-// This is the Server Component
+// Server Component
 export default async function Home() {
-  // Fetch data on the server
+  // Fetch data once and cache it (useful if data doesn't change often)
   const { posts, categories } = await getData();
 
   return (
-    <div>
-      {/* Pass fetched data to the client component */}
-      <About/>
-      <BlogPage posts={posts} categories={categories} />
-    </div>
+    <main>
+      {/* About component will render instantly */}
+      <section style={{ minHeight: "100vh" }}> {/* Ensure it fills initial viewport */}
+        <About />
+      </section>
+
+      {/* BlogPage component will load asynchronously */}
+      <section>
+        <BlogPage posts={posts} categories={categories} />
+      </section>
+    </main>
   );
 }
