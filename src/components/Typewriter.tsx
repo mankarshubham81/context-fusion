@@ -39,7 +39,7 @@ const Typewriter: React.FC<TypewriterProps> = ({
 
   return (
     <p className="border-b-4 text-customBlue border-purple-700 pb-1 inline-block">
-      {text}
+      I'm {text}
       <span className="blinking-cursor text-customBlue font-bold">|</span>
     </p>
   );
