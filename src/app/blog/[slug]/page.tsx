@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: BlogProps): Promise<Metadata>
   return {
     title: `${post.seoTitle || post.title} | Context Fusion`,
     description: post.seoDescription || post.excerpt,
-    keywords: post.metaKeywords ? post.metaKeywords.join(', ') : '',
+    keywords: post.metaKeywords ? post.metaKeywords.join(', ') : 'blog',
     openGraph: {
       title: post.seoTitle || post.title,
       description: post.seoDescription || post.excerpt,

@@ -43,9 +43,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 async function fetchBlogPostData(slug: string) {
   return {
     slug: slug,
-    title: "Sample Title",
-    excerpt: "Sample excerpt for SEO.",
-    imageUrl: "https://example.com/image.jpg",
+    title: "Context Fusion",
+    excerpt: "The best modern SEO friendly blog.",
+    imageUrl: "https://context-fusion.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcontext_fusion.72f1120c.png&w=96&q=75",
   };
 }
 
