@@ -53,17 +53,18 @@ const BlogPost = ({ slug, title, excerpt, category, date, author, imageUrl }: Bl
   return (
     <article className="relative h-full rounded-lg bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out overflow-hidden">
       <header className="relative">
-        <Image
-          src={`${imageUrl}?w=800&h=450&fit=crop`} // Adjust the image URL with Sanity-specific transformations
-          alt={`Cover image for ${title}`}
-          width={800}
-          height={450}
-          priority
-          placeholder="blur"
-          blurDataURL={`${imageUrl}?w=10&blur=10`}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="w-full h-52 lg:h-64 object-cover"
-        />
+      <Image
+        src={`${imageUrl}?w=800&h=450&fit=crop`} // URL with optimized dimensions for desktop
+        alt={`Cover image for ${title}`}
+        width={800}
+        height={450}
+        priority
+        placeholder="blur"
+        blurDataURL={`${imageUrl}?w=10&blur=10`}
+        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
+        className="w-full h-52 lg:h-64 object-cover"
+      />
+
       </header>
       <div className="p-6">
         <h2 className="text-2xl font-bold leading-tight mb-2" itemProp="headline">
