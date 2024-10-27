@@ -13,11 +13,22 @@ const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
 
 export const metadata: Metadata = {
   title: "Context Fusion - A Blog by Shubham Mankar",
-  description: "Documenting and sharing knowledge, wisdom, and practical lessons from my journey as a software engineer.",
-  keywords: ["blog", "software engineering", "MERN stack", "JavaScript", "technology", "learning", "SEO"],
+  description:
+    "Join Shubham Mankar on Context Fusion, a blog journey where technology meets wisdom. Dive into topics that connect ideas across software engineering, creativity, problem-solving, and personal growth. With actionable insights and accessible explanations, Context Fusion inspires developers, tech enthusiasts, and lifelong learners alike.",
+  keywords: [
+    "blog",
+    "software engineering",
+    "MERN stack",
+    "JavaScript",
+    "technology",
+    "learning",
+    "coding insights",
+    "personal development"
+  ],
   openGraph: {
     title: "Context Fusion - A Blog by Shubham Mankar",
-    description: "Documenting and sharing knowledge and practical lessons from software development.",
+    description:
+      "Discover Context Fusion, a blog by Shubham Mankar that connects technology, practical wisdom, and personal insights for developers, tech enthusiasts, and lifelong learners.",
     url: "https://context-fusion.vercel.app",
     images: [
       {
@@ -27,21 +38,16 @@ export const metadata: Metadata = {
         alt: "Context Fusion Blog",
       },
     ],
-    type: 'website',
+    type: "website",
   },
   robots: {
     index: true,
     follow: true,
   },
   other: {
-    'X-UA-Compatible': 'IE=edge', // Add additional meta tags if needed
+    "X-UA-Compatible": "IE=edge",
   },
-  icons: {
-    icon: '/src/app/icon.png',
-    //TODO: replace above png like below ico
-    // icon: '/src/app/favicon.ico',
-    
-  }
+  icons: "https://context-fusion.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcontext_fusion.72f1120c.png&w=96&q=75"
 };
 
 export default function RootLayout({
