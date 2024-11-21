@@ -46,7 +46,7 @@ export const blogPostsQuery = `
 `;
 
 
-export const postsQuery = `*[_type == "post"]{
+export const postsQuery = `*[_type == "post" && publishedAt < now()] | order(publishedAt desc) {
   title,
   slug,
   "authorName": author->name,
