@@ -27,7 +27,7 @@ const BlogPage = ({ posts, categories }: BlogPageProps) => {
       : posts.filter((post) =>
           post.categories.some((cat: Category) => cat.title === selectedCategory)
         );
-      // 13
+      // 10
 
     if (searchTerm.trim()) {
       updatedPosts = updatedPosts.filter((post) =>
