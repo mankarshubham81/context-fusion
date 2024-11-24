@@ -1,33 +1,31 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { BlogPostData, Category } from "../app/types";
+import React, { useMemo, useState } from "react";
+import { BlogPostData, Category } from "@/app/types";
 import { FaSearch } from "react-icons/fa";
 import dynamic from "next/dynamic";
-import BlogPost from "../components/BlogPost";
-import CategoryList from "../components/CategoryList";
+import BlogPost from "@/components/BlogPost";
+import CategoryList from "@/components/CategoryList";
 
-const Pagination = dynamic(() => import("../components/Pagination"), { ssr: false });
+const Pagination = dynamic(() => import("@/components/Pagination"), { ssr: false });
 
 interface BlogPageProps {
   posts: BlogPostData[];
   categories: Category[];
 }
 
-const BlogPage = ({ posts, categories }: BlogPageProps) => {
+const BlogPage: React.FC<BlogPageProps> = ({ posts, categories }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const postsPerPage = 6;
 
-  // Filter posts based on category and search term
   const filteredPosts = useMemo(() => {
     let updatedPosts = selectedCategory === "All"
       ? posts
       : posts.filter((post) =>
           post.categories.some((cat: Category) => cat.title === selectedCategory)
         );
-      // 10
 
     if (searchTerm.trim()) {
       updatedPosts = updatedPosts.filter((post) =>
@@ -38,28 +36,24 @@ const BlogPage = ({ posts, categories }: BlogPageProps) => {
     return updatedPosts;
   }, [selectedCategory, searchTerm, posts]);
 
-  // Paginate filtered posts
   const paginatedPosts = useMemo(() => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     return filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   }, [filteredPosts, currentPage, postsPerPage]);
 
-  // Handle category change and reset pagination to first page
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    setCurrentPage(1); // Reset to first page when category changes
+    setCurrentPage(1);
   };
 
-  // Handle search term change and reset pagination to first page
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to first page when search term changes
+    setCurrentPage(1);
   };
 
   return (
     <section className="max-w-screen-xl mx-auto py-10 px-4">
-      {/* Search bar */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center">
           <FaSearch className="mr-2 text-gray-500" />
@@ -74,14 +68,12 @@ const BlogPage = ({ posts, categories }: BlogPageProps) => {
         </div>
       </div>
 
-      {/* Category list */}
       <CategoryList
         categories={categories}
         selectedCategory={selectedCategory}
         onCategoryClick={handleCategoryChange}
       />
 
-      {/* Blog posts */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-7">
         {paginatedPosts.length > 0 ? (
           paginatedPosts.map((post: BlogPostData) => (
@@ -105,7 +97,6 @@ const BlogPage = ({ posts, categories }: BlogPageProps) => {
         )}
       </div>
 
-      {/* Pagination */}
       {filteredPosts.length > postsPerPage && (
         <Pagination
           currentPage={currentPage}

@@ -1,42 +1,30 @@
-// src/app/page.tsx (Server Component)
-
-import { client as sanityClient } from "../sanity/lib/client";
-import { BlogPostData, Category } from "../app/types";
-import { postsQuery, categoriesQuery } from "@/sanity/lib/queries";
-import About from "@/components/About";
 import dynamic from "next/dynamic";
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { postsQuery, categoriesQuery } from "@/sanity/lib/queries";
+import { BlogPostData, Category } from "@/app/types";
+import About from "@/components/About";
 
-// Dynamic import for BlogPage with suspense fallback
+// Dynamically import BlogPage
 const BlogPage = dynamic(() => import("@/components/BlogPage"), {
-  loading: () => <p>Loading posts...</p>, // Optional loading fallback
-  ssr: false,
+  loading: () => <p>Loading posts...</p>,
+  ssr: false, // Disable server-side rendering for this component
 });
 
-// Server-side function to fetch data
-async function getData() {
-  try {
-    const posts: BlogPostData[] = await sanityClient.fetch(postsQuery);
-    const categories: Category[] = await sanityClient.fetch(categoriesQuery);
-    return { posts, categories };
-  } catch (error) {
-    console.error("Error fetching data from Sanity:", error);
-    return { posts: [], categories: [] };
-  }
-}
-
-// Server Component
 export default async function Home() {
-  // Fetch data once and cache it (useful if data doesn't change often)
-  const { posts, categories } = await getData();
+  // Fetch latest data from Sanity CMS
+  const { posts, categories } = await Promise.all([
+    sanityFetch<BlogPostData[]>({ query: postsQuery, tag: "posts" }), // Explicit type
+    sanityFetch<Category[]>({ query: categoriesQuery, tag: "categories" }), // Explicit type
+  ]).then(([posts, categories]) => ({ posts, categories }));
 
   return (
     <main>
-      {/* About component will render instantly */}
-      <section style={{ minHeight: "100vh" }}> {/* Ensure it fills initial viewport */}
+      {/* About Section */}
+      <section style={{ minHeight: "100vh" }}>
         <About />
       </section>
 
-      {/* BlogPage component will load asynchronously */}
+      {/* BlogPage Section */}
       <section>
         <BlogPage posts={posts} categories={categories} />
       </section>
