@@ -23,9 +23,7 @@ const About = async () => {
     "Web Developer",
     "Photographer",
     "Skater",
-    "Shuttler",
     "Blogger",
-    "Writer",
     "Vadak",
   ];
 
