@@ -11,7 +11,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism'; // Import multiple styles if needed
 import Image from 'next/image';
 import { PortableTextBlock, LinkMarkDefinition } from '../app/types'; // Adjust the path as necessary
-// import { PortableTextBlock, LinkMarkDefinition, VideoBlock } from '../app/types'; // Adjust the path as necessary
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { FaRegCopy, FaCheck } from 'react-icons/fa'; // Icons for copy button
 
@@ -63,7 +62,6 @@ const CodeBlock: React.FC<{ value: CodeBlockValue }> = ({ value }) => {
     'graphql',
     'jsx',
     'tsx',
-    // Add more languages as needed
   ];
 
   const language = value.language && validLanguages.includes(value.language) ? value.language : 'text';
@@ -78,14 +76,14 @@ const CodeBlock: React.FC<{ value: CodeBlockValue }> = ({ value }) => {
   return (
     <div className="relative">
       <CopyToClipboard text={value.code} onCopy={handleCopy}>
-          <button
-            className="flex align-middle items-center absolute top-2 right-2 rounded text-gray-200 bg-gray-900 p-2"
-            aria-label="Copy code"
-          >
-            {copied ? <FaCheck className='mx-2' /> : <FaRegCopy className='mx-2' />}
-            <span className="text-m px-1">{copied ? 'Copied' : 'Copy code'}</span>
-          </button>
-        </CopyToClipboard>
+        <button
+          className="flex align-middle items-center absolute top-2 right-2 rounded text-gray-200 bg-gray-900 p-2"
+          aria-label="Copy code"
+        >
+          {copied ? <FaCheck className="mx-2" /> : <FaRegCopy className="mx-2" />}
+          <span className="text-m px-1">{copied ? 'Copied' : 'Copy code'}</span>
+        </button>
+      </CopyToClipboard>
       <SyntaxHighlighter language={language} style={dracula} showLineNumbers>
         {value.code}
       </SyntaxHighlighter>
@@ -107,16 +105,11 @@ const components: Partial<PortableTextComponents> = {
             height={600}
             className="rounded"
             loading="lazy"
-            // Uncomment and ensure fallback image exists
-            // onError={(e) => {
-            //   e.currentTarget.src = '/fallback-image.jpg';
-            // }}
           />
         </div>
       );
     },
     video: ({ value }: { value: VideoBlockValue }) => {
-      // Validate the video URL format
       const isYouTube = value.url.includes('youtube.com') || value.url.includes('youtu.be');
       const isVimeo = value.url.includes('vimeo.com');
 
@@ -139,7 +132,6 @@ const components: Partial<PortableTextComponents> = {
       } else if (isVimeo) {
         embedUrl = getVimeoEmbedUrl(value.url);
       } else {
-        // Assume direct video file
         embedUrl = value.url;
       }
 
@@ -165,7 +157,6 @@ const components: Partial<PortableTextComponents> = {
         </div>
       );
     },
-    // Add more types as needed
   },
   block: {
     h1: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
@@ -180,20 +171,20 @@ const components: Partial<PortableTextComponents> = {
     normal: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
       <p className="text-base leading-7 my-1">{children}</p>
     ),
-    // Add more block styles as needed
+    ul: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
+      <ul className="list-disc list-inside ml-4 my-2">{children}</ul>
+    ),
+    ol: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
+      <ol className="list-decimal list-inside ml-4 my-2">{children}</ol>
+    ),
+    li: ({ children }: PortableTextComponentProps<PortableTextBlock>) => (
+      <li className="mb-1">{children}</li>
+    ),
   },
   marks: {
     link: ({ children, value }: PortableTextMarkComponentProps<LinkMarkDefinition>) => {
       const href = value?.href;
-
-      if (!href) {
-        // If href is not provided, render the children without a link
-        return <span>{children}</span>;
-      }
-
-      // Determine if the link is external
-      const isExternal = href.startsWith('http');
-
+      const isExternal = href?.startsWith('http');
       return (
         <a
           href={href}
@@ -205,9 +196,7 @@ const components: Partial<PortableTextComponents> = {
         </a>
       );
     },
-    // Add more marks as needed
   },
-  // No 'unknown' key; rely on default rendering
 };
 
 interface PortableTextProps {
@@ -219,7 +208,6 @@ const PortableText: React.FC<PortableTextProps> = ({ content }) => {
     return <p>No content available.</p>;
   }
 
-// Filter out invalid blocks, including those without children
   const validContent = content.filter(
     (block) =>
       block &&
